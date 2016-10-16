@@ -78,6 +78,7 @@
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{UCNHeader}{RGB}{233,131,0}
 %hyperlinks in the tabel of contents - comment this out before the report is printed.
 \usepackage{hyperref}
 \hypersetup{
@@ -170,8 +171,6 @@ morekeywords={DelayUs},
 %\input{settings/macros}
 
 %%%CHAPTERLAYOUT%%%
-%setting the color of the chapter number
-\definecolor{numbercolor}{gray}{0.7}
 %Downloaded chapter-setup:
 \newif\ifchapternonum
 \makechapterstyle{jenor}{
@@ -181,7 +180,7 @@ morekeywords={DelayUs},
   	\renewcommand\printchapternum{}
   	\renewcommand\printchapternonum{\chapternonumtrue}
   	\renewcommand\chaptitlefont{\fontfamily{pbk}\fontseries{db}\fontshape{n}\fontsize{25}{35}\selectfont\raggedleft}
-  	\renewcommand\chapnumfont{\fontfamily{pbk}\fontseries{m}\fontshape{n}\fontsize{1in}{0in}\selectfont\color{numbercolor}}
+  	\renewcommand\chapnumfont{\fontfamily{pbk}\fontseries{m}\fontshape{n}\fontsize{1in}{0in}\selectfont\color{UCNHeader}}
   	\renewcommand\printchaptertitle[1]{%
     \noindent
     \ifchapternonum
