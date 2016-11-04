@@ -15,7 +15,7 @@ GP2Y0A41SK0F (short) \\
 
 The QRE113 sensor
 
-Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. It works by emitting infarred light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor then regulates it output voltage from 1 to 100%. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\
+Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. It works by emitting infarred light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor then regulates it output voltage from 1 to 100\%.\\ Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\
 
 TBD sensor specs.\
 
@@ -26,12 +26,17 @@ TBD måske lille skema over specs?
 
 \subsubsection{ADC diagram} 
 
+\includegraphics[width=0.7\textwidth]{figures/adcblock.PNG}
+
+
 \subsubsection{The usage of ADC}
-
+TBD (skal vi overhovedet forklare det igen?) :D
 \section{The chipKIT Uno32 board}
+The robot needs a micro controller unit, for implementing motor control and avoidance 
 
-
-\section{The motor shield - PKA03}
+\section{The motor shield}
+The motor shield is containing the H-bridge and will be the board for ensuring control of the different components and motors.
+TBD (hvad er der helt præcist på boarded?)
 
 \subsection{The H bridge}
 The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors. The point of using an H-bridge is to ensure motor safety and functionality.
