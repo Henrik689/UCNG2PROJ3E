@@ -1,21 +1,24 @@
 \section{Description of the hardware structure and functionality}
 
-In this section the different components of the hardware will be listed, described and explained.
+In this section the different components of the hardware will be listed, described and explained.\
+TBD: Mere fyld
 
 \section{Hardware diagram}
+TBD: Indsæt hardwarediagram\\
 Beskrivelse af hardware diagram
 
 
 \subsection{Object avoidance sensor choices}
-SR04 Ultrasound
+SR04 Ultrasound:\\
 GP2Y0A02YK0F (long) \\	
 GP2Y0A41SK0F (short) \\
 \\
 \subsection{Line following sensor choice} 
 
-The QRE113 sensor
+The QRE113 sensor\
+TBD: Er det overhovedet den vi vil bruge?\
 
-Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. It works by emitting infarred light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor then regulates it output voltage from 1 to 100\%.\\ Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\
+Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. It works by emitting infarred light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor then regulates its output voltage from 1\% to 100\%, or 0V to 3.3V. TBD: Passer spændingen her?\\ Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\
 
 TBD sensor specs.\
 
@@ -30,9 +33,10 @@ TBD måske lille skema over specs?
 
 
 \subsubsection{The usage of ADC}
-TBD (skal vi overhovedet forklare det igen?) :D
+TBD (skal vi overhovedet forklare det igen? B: Vi skal nok forklare hvordan, og til hvad, vi udnytter det i projektet)
 \section{The chipKIT Uno32 board}
-The robot needs a micro controller unit, for implementing motor control and avoidance 
+The robot needs a micro controller unit, for implementing motor control and avoidance\
+TBD: Mere fyld, hvorfor dette board over UCN?
 
 \section{The motor shield}
 The motor shield is containing the H-bridge and will be the board for ensuring control of the different components and motors.
