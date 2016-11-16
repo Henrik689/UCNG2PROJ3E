@@ -2,32 +2,67 @@ Beskriv test section
 
 \section{Unit Testing}
 
-\subsection{Sensor}
+\subsection{Infrared TBD: Find navn på sensor}
 
 
-%\subsubsection{Equipment}
-%\begin{enumerate}
-%    \item[•]Hameg HM8040-2 Triple Power Supply
-%	\item[•]Fluke 45 Multimeter
-%\end{enumerate}
+\subsubsection{Equipment}
+\begin{enumerate}
+    \item[•]Hameg HM8040-2 Triple Power Supply
+    \item[•]Agilent MSO-X 3024A Oscilloscope    
+\end{enumerate}
 
 \subsubsection{Setup}
-
+Power to the sensor is supplied by the power supply and the output is read on the oscilloscope.
 
 \subsubsection{Results}
-%\textbf{White Surface:}
-%Average voltage measured: 230 mV\newline
-%\textbf{Black Surface:}
+\textbf{30mm:} 2.29V
+\textbf{50mm:} 3.07V
+\textbf{100mm:} 2.34V
+\textbf{200mm:} 1.31V
+\textbf{500mm:} 515mV
+
+As is evident in the results above, this sensor does not work at low distances, which is also described in the datasheet.
+
+\subsection{Ultralyd TBD: Find navn på sensor}
+
+
+\subsubsection{Equipment}
+\begin{enumerate}
+    \item[•]Arduino UNO
+    \item[•]Agilent MSO-X 3024A Oscilloscope    
+\end{enumerate}
+
+\subsubsection{Setup}
+A small program for the Arduino has been written which allows the MCU to trigger the sensor and waits a pre-specified amount of time before triggering again, to allow for the return of the ultrasound wave. 
+
+\subsubsection{Results}
+\textbf{30mm:} 152 us
+\textbf{50mm:} 285 us
+\textbf{100mm:} 600 us
+\textbf{200mm:} 1.23 ms
+\textbf{500mm:} 2.32 ms
+
+\subsection{QRE1113}
+
+\subsubsection{Equipment}
+\begin{enumerate}
+    \item[•]Hameg HM8040-2 Triple Power Supply
+\end{enumerate}
+
+\subsubsection{Setup}
+Power to the motors is supplied by the power supply, which also measures the current.
+
+\subsubsection{Results}
+Measured current on both engines is between 70 and 80 mA when running freely.
 
 
 \subsection{DC Motors}
 
-
-%\subsubsection{Equipment}
-%\begin{enumerate}
-%	\item[•]Hameg HM8040-2 Triple Power Supply
-%	\item[•]Fluke 45 Multimeter
-%\end{enumerate}
+\subsubsection{Equipment}
+\begin{enumerate}
+	\item[•]Hameg HM8040-2 Triple Power Supply
+	\item[•]Fluke 45 Multimeter
+\end{enumerate}
 
 \subsubsection{Setup}
 
