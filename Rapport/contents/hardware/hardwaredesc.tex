@@ -5,11 +5,37 @@ TBD: Mere fyld
 
 \section{Hardware diagram}
 TBD: Indsæt hardwarediagram\\
-Beskrivelse af hardware diagram
+Beskrivelse af hardware diagram\\
+
+\subsection{Ultrasound sensor}
+When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the " TBD " has been picked.\\
+
+The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\\
 
 
-\subsection{Object avoidance sensor choices}
+There are three popular ways to process the information gathered from the ultrasound sensor. \\
+
+\begin{enumerate}
+	\item[•]Time of flight
+	\item[•]Doppler shift
+	\item[•]Amplitude attenuation
+\end{enumerate}
+
+In the scope of the project, the robot will be using "Time of flight" for sensing the distance between itself and the obstacle.\\
+
+The calculation for using the ultrasound sensor is: \\
+
+t = time\\
+r = distance travelled\\
+c = speed of light\\
+
+r= c*t\\
+
+With this the robot can calculate the time of flight.
 SR04 Ultrasound:\\
+
+\subsection{Infrared sensor}
+
 GP2Y0A02YK0F (long) \\	
 GP2Y0A41SK0F (short) \\
 \\
