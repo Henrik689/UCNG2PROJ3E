@@ -4,8 +4,16 @@ In this section the different components of the hardware will be listed, describ
 TBD: Mere fyld
 
 \section{Hardware diagram}
+
 TBD: Indsæt hardwarediagram\\
 Beskrivelse af hardware diagram\\
+
+\section{Sensors and sensor concept}
+
+TBD: Find out why this doesn't show up in build...
+
+The robot will utilize two sets on sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
+The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
 
 \subsection{Ultrasound sensor}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the " TBD " has been picked.\\
@@ -36,15 +44,21 @@ SR04 Ultrasound:\\
 
 \subsection{Infrared sensor}
 
+The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors. This will allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even surfaces. They work by emitting infrared light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor will then output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\\
+
+\subsection{Hybrid-infrared sensors - TBD name}
+
 GP2Y0A02YK0F (long) \\	
 GP2Y0A41SK0F (short) \\
-\\
-\subsection{Line following sensor choice} 
 
-The QRE113 sensor\
+\subsection{Line following sensor choice - the QRE1113} 
+
+The QRE1113 sensor\
 TBD: Er det overhovedet den vi vil bruge?\
 
-Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. It works by emitting infarred light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor then regulates its output voltage from 1\% to 100\%, or 0V to 3.3V. TBD: Passer spændingen her?\\ Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\
+Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. TBD: Nyt afsnit om QRE1113
+
+The sensor then regulates its output voltage from 1\% to 100\%, or 0V to 3.3V. TBD: Passer spændingen her?\\
 
 TBD sensor specs.\
 
