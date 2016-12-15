@@ -44,7 +44,7 @@ c = speed of light\\
 r= c*t\\
 
 With this the robot can calculate the time of flight.\
-SR04 Ultrasound:\
+TBD SR04 Ultrasound:\
 \subsubsection{Considerations:}
 When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration.\\ Temperature and humidity can affect the speed of sound, just as air currents have been known to be able to create invisible boundaries that can reflect ultrasonic waves.\\
 Ultrasound sensors have something called a dead zone, this occours when an object is infront of the sensors and the receiver can't keep up.\\
@@ -75,23 +75,36 @@ TBD måske lille skema over specs?
 \section{Analog-to-digital converter}
 
 
-\subsubsection{ADC diagram} 
+%\subsubsection{ADC diagram} 
 
-\includegraphics[width=0.7\textwidth]{figures/adcblock.PNG}
+%\includegraphics[width=0.7\textwidth]{figures/adcblock.PNG}
 
 
 \subsubsection{The usage of ADC}
 TBD (skal vi overhovedet forklare det igen? B: Vi skal nok forklare hvordan, og til hvad, vi udnytter det i projektet)
+
 \section{The chipKIT Uno32 board}
-The robot needs a micro controller unit, for implementing motor control and avoidance\
-TBD: Mere fyld, hvorfor dette board over UCN?
+The robot will utilize the chipKIT Uno 32 board to execute code. The board
+was chosen both due to past experiences, but also because the robot would need
+line-following properties, and we had already written a functional line-following robot
+previously, which also included some important features, including PID control and 
+pulse-width modulation patterns. \\
+This enabled a lot of recycled code, which was a strong point
+in the Uno 32's favor due to time constraints. \\
+
+The board is also compatible with Arduino shields, and as such designing the H-bridge for it
+becomes more straightforward. It's fast enough to execute the code, and works well within the
+input power the robot will utilize.
 
 \section{The motor shield}
 The motor shield is containing the H-bridge and will be the board for ensuring control of the different components and motors.
 TBD (hvad er der helt præcist på boarded?)
 
 \subsection{The H bridge}
-The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors. The point of using an H-bridge is to ensure motor safety and functionality.
+The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
 
 \section{The Bluetooth tranceiver}
+The robot will utilize the BlueSmiRF Silver bluetooth tranceiver. The transceiver is made by Sparkfun, it is utilized to make use of an GUI, by sending data from the MCU to the computer (GUI) by the use of bluetooth.\\ The bluetooth tranceiver makes it possible to monitor both the inputs and the logic behind the steering. The baudrate is between 2400-115200 bps and the tranceiver can be powered from 3.3v up to 6v. 
 
+\section{Part conclusion}
+TBD H-bro problemer og løsning
