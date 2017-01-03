@@ -50,6 +50,9 @@ When using the ultrasound as a sensing tool, there are some factors that must be
 Ultrasound sensors have something called a dead zone, this occours when an object is infront of the sensors and the receiver can't keep up.\\
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
+\subsubsection{Mounting}
+%\includegraphics[width=0.7\textwidth]{figures/}
+
 \subsection{Infrared sensor}
 
 The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors. This will allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even surfaces. They work by emitting infrared light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor will then output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\\
