@@ -1,12 +1,12 @@
 \section{Description of the hardware structure and functionality}
 
 In this section the different components of the hardware will be listed, described and explained.\
-TBD: Mere fyld
+
 
 \section{Hardware diagram}
+\includegraphics[width=0.7\textwidth]{figures/hardwareDIA.jpg} \\
 
-TBD: Indsæt hardwarediagram\\
-Beskrivelse af hardware diagram\\
+The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The micro controller is receiving data from the 3 sensor sets; the ultrasound sensors, infrared light-sensors and the tachometer sensor.\ The micro controller then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will send it to the interface. \\ \\
 
 \section{Sensors and sensor concept}
 
@@ -15,8 +15,10 @@ TBD: Find out why this doesn't show up in build...
 The robot will utilize two sets on sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
 The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
 
-\subsection{Ultrasound sensor}
-When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the " TBD " has been picked.\\
+\subsection{Ultrasound sensor - HC-SR04}
+When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
+
+\includegraphics[width=0.7\textwidth]{figures/hc04.jpg}
 
 The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\
 
@@ -53,27 +55,13 @@ Some materials are very absorbent, which will result in less reflected ultrasoun
 \subsubsection{Mounting}
 %\includegraphics[width=0.7\textwidth]{figures/}
 
-\subsection{Infrared sensor}
+\subsection{Infrared sensor - QRE1113}
 
-The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors. This will allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even surfaces. They work by emitting infrared light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one. The sensor will then output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently. Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\\
+The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors.\\ This will allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even surfaces.\\ They work by emitting infrared light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one.\\ The sensor will then output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently.\\ Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\\
 
-\subsection{Hybrid-infrared sensors - TBD name}
+Due to past experiences, the QRE1113 sensor has been chosen to be utilized on the robot to enable its line-following properties and positioning
 
-GP2Y0A02YK0F (long) \\	
-GP2Y0A41SK0F (short) \\
-
-\subsection{Line following sensor choice - the QRE1113} 
-
-The QRE1113 sensor\
-TBD: Er det overhovedet den vi vil bruge?\
-
-Due to past experiences, the QRE113 sensor has been chosen to be utilized on the robot to enable its line-following properties. TBD: Nyt afsnit om QRE1113
-
-The sensor then regulates its output voltage from 1\% to 100\%, or 0V to 3.3V. TBD: Passer spændingen her?\\
-
-TBD sensor specs.\
-
-TBD måske lille skema over specs?
+\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
 
 \section{Analog-to-digital converter}
 
@@ -105,6 +93,8 @@ TBD (hvad er der helt præcist på boarded?)
 
 \subsection{The H bridge}
 The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
+
+\subsection{The motors - Pololu}
 
 \section{The Bluetooth tranceiver}
 The robot will utilize the BlueSmiRF Silver bluetooth tranceiver. The transceiver is made by Sparkfun, it is utilized to make use of an GUI, by sending data from the MCU to the computer (GUI) by the use of bluetooth.\\ The bluetooth tranceiver makes it possible to monitor both the inputs and the logic behind the steering. The baudrate is between 2400-115200 bps and the tranceiver can be powered from 3.3v up to 6v. 
