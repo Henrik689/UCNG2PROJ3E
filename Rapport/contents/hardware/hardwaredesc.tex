@@ -4,7 +4,14 @@ In this section the different components of the hardware will be listed, describ
 
 
 \section{Hardware diagram}
-\includegraphics[width=0.7\textwidth]{figures/hardwareDIA.jpg} \\
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/hardwareDIA.jpg}
+	\caption{\text{Hardware diagram with arrows}}
+	\label{Hardware diagram}
+\end{figure}
+
+
 
 The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The micro controller is receiving data from the 3 sensor sets; the ultrasound sensors, infrared light-sensors and the tachometer sensor.\ The micro controller then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will send it to the interface. \\ \\
 
@@ -18,7 +25,13 @@ The second is a hybrid set of ultrasound and infrared sensors. These will be wor
 \subsection{Ultrasound sensor - HC-SR04}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
 
-\includegraphics[width=0.7\textwidth]{figures/hc04.jpg}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/hc04.jpg}
+	\caption{\text{The HC-SR04 ultrasound sensor}}
+	\label{Hardware diagram}
+\end{figure}
+
 
 The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\
 
@@ -53,7 +66,12 @@ Ultrasound sensors have something called a dead zone, this occours when an objec
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
 \subsubsection{Mounting}
-%\includegraphics[width=0.7\textwidth]{figures/}
+%\begin{figure}[!ht]
+	%\centering
+	%\includegraphics[width=0.7\textwidth]{figures/mount.jpg}
+	%\caption{\text[Sensor mount]{Mounts made by 3D printing, for ultrasound sensors}}
+	%\label{Hardware diagram}
+%\end{figure}
 
 \subsection{Infrared sensor - QRE1113}
 
@@ -61,7 +79,14 @@ The robot will make use of infrared sensors in symbiosis with the aforementioned
 
 Due to past experiences, the QRE1113 sensor has been chosen to be utilized on the robot to enable its line-following properties and positioning
 
-\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
+	\caption{\text{Mounted QRE1113 sensor}}
+	\label{Hardware diagram}
+\end{figure}
+
+%\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
 
 \section{Analog-to-digital converter}
 
