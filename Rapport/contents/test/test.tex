@@ -1,29 +1,8 @@
-TBD
-Beskriv hvad der skal ske i afsnittet
+In this section the different parts and signals will be tested, this is to make sure everything is up to par with our requirements specifications. The tests consists of measuring different factors, such as current, voltage and response time of each fundamental part. The testing will be done with the available measuring devices such as an oscilloscope, power supply or multimeter.
 \section{Unit Testing}
 
-\subsection{Infrared TBD: Find navn på sensor}
 
-
-\subsubsection{Equipment}
-\begin{enumerate}
-    \item[•]Hameg HM8040-2 Triple Power Supply
-    \item[•]Agilent MSO-X 3024A Oscilloscope    
-\end{enumerate}
-
-\subsubsection{Setup}
-Power to the sensor is supplied by the power supply and the output is read on the oscilloscope.
-
-\subsubsection{Results}
-\textbf{30mm:}  2.29V\\
-\textbf{50mm:}  3.07V\\
-\textbf{100mm:} 2.34V\\
-\textbf{200mm:} 1.31V\\
-\textbf{500mm:} 515mV\\
-
-As is evident in the results above, this sensor does not work at low distances, which is also described in the datasheet.
-
-\subsection{Ultralyd TBD: Find navn på sensor}
+\subsection{Ultrasound HC-SR04}
 
 
 \subsubsection{Equipment}
@@ -42,20 +21,6 @@ A small program for the Arduino has been written which allows the MCU to trigger
 \textbf{200mm:} 1.23 ms\\
 \textbf{500mm:} 2.32 ms\\
 
-\subsection{QRE1113}
-
-\subsubsection{Equipment}
-\begin{enumerate}
-    \item[•]Hameg HM8040-2 Triple Power Supply
-\end{enumerate}
-
-\subsubsection{Setup}
-Power to the motors is supplied by the power supply, which also measures the current.
-
-\subsubsection{Results}
-Measured current on both engines is between 70 and 80 mA when running freely.
-
-\subsection{DC Motors}
 
 \subsubsection{Equipment}
 \begin{enumerate}
@@ -103,14 +68,6 @@ Faulty NPN transistor. base 0V, collector 0V.\\
 
 \subsubsection{Results}
 
-\subsection{ADC}
-
-\subsubsection{Equipment}
- 
-\subsubsection{Setup}
- 
-\subsubsection{Results}
- 
 \section{Integration Testing}
 
 \subsection{PWM motor control}

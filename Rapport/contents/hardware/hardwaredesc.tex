@@ -55,7 +55,7 @@ c = speed of light\\
 r= c*t\\
 
 With this the robot can calculate the time of flight.\
-TBD SR04 Ultrasound:\
+
 \subsubsection{Considerations:}
 When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration.\\ Temperature and humidity can affect the speed of sound, just as air currents have been known to be able to create invisible boundaries that can reflect ultrasonic waves.\\
 Ultrasound sensors have something called a dead zone, this occours when an object is infront of the sensors and the receiver can't keep up.\\
@@ -69,31 +69,18 @@ Some materials are very absorbent, which will result in less reflected ultrasoun
 	%\label{Hardware diagram}
 %\end{figure}
 
-\subsection{Infrared sensor - QRE1113}
+%\subsection{Infrared sensor - QRE1113}
 
-The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors.\\ This will allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even surfaces.\\ They work by emitting infrared light onto a surface, and then taking a reading based on the amount of light that gets reflected. A light surface will reflect more light back than a dark one.\\ The sensor will then output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into digital signals, which can be monitored more conveniently.\\ Functionally, the robot is left with a way of knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows it to detect where the line it needs to follow is.\\
+%The robot will make use of infrared sensors in symbiosis with the aforementioned ultrasound sensors.\\ This will %allow it to take readings on a wider array of surfaces, as infrared sensors are better suited for less even %surfaces.\\ They work by emitting infrared light onto a surface, and then taking a reading based on the amount of %light that gets reflected. A light surface will reflect more light back than a dark one.\\ The sensor will then %output a feedback signal made of a certain amount of voltage, ranging from 1\% to 100\%, based on how much light %was reflected back. Based on this output voltage, it is possible to use an ADC to convert these signals into %digital signals, which can be monitored more conveniently.\\ Functionally, the robot is left with a way of %knowing which surface the sensors are above - and in the case of a track with a black line to follow, this allows %it to detect where the line it needs to follow is.\\
 
-Due to past experiences, the QRE1113 sensor has been chosen to be utilized on the robot to enable its line-following properties and positioning
+%Due to past experiences, the QRE1113 sensor has been chosen to be utilized on the robot to enable its line-f%ollowing properties and positioning
 
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
-	\caption{\text{Mounted QRE1113 sensor}}
-	\label{Hardware diagram}
-\end{figure}
-
-%\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
-
-\section{Analog-to-digital converter}
-
-
-%\subsubsection{ADC diagram} 
-
-%\includegraphics[width=0.7\textwidth]{figures/adcblock.PNG}
-
-
-\subsubsection{The usage of ADC}
-TBD (skal vi overhovedet forklare det igen? B: Vi skal nok forklare hvordan, og til hvad, vi udnytter det i projektet)
+%\begin{figure}[!ht]
+%	\centering
+%	\includegraphics[width=0.7\textwidth]{figures/QRE.jpg}
+%	\caption{\text{Mounted QRE1113 sensor}}
+%	\label{Hardware diagram}
+%\end{figure}
 
 \section{The chipKIT Uno32 board}
 The robot will utilize the chipKIT Uno 32 board to execute code. The board
