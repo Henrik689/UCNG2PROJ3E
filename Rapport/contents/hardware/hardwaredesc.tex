@@ -1,5 +1,6 @@
 \section{Description of the hardware structure and functionality}
-
+ 
+TBD mere fyld og billede
 In this section the different components of the hardware will be listed, described and explained.\
 
 
@@ -18,6 +19,9 @@ The micro controller is connected to the motor-shield.\ The motor-shield is then
 The robot will utilize two sets on sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
 The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
 
+\subsection{Choice of sensors}
+TBD
+
 \subsection{Ultrasound sensor - HC-SR04}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
 
@@ -28,7 +32,8 @@ When a robot should be able avoid obstacles it will need a device to inform the 
 	\label{Hardware diagram}
 \end{figure}
 
-
+TBD Mere om denne sensor
+ 
 The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\
 
 What is causing the device to make ultrasonic sound is a piezoelectric crystal. The crystal is receiving a rapid oscillating electrical signal, this causes the crystal to expand and contract and thereby creating a sound wave.\ The sound waves will then after being reflected return to a piezoelectric receiver which can then convert the waves into voltage by using the same method as explained above. \\
@@ -62,6 +67,8 @@ Ultrasound sensors have something called a dead zone, this occours when an objec
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
 \subsubsection{Mounting}
+
+TBD billede med lille tekst
 %\begin{figure}[!ht]
 	%\centering
 	%\includegraphics[width=0.7\textwidth]{figures/mount.jpg}
@@ -99,17 +106,32 @@ input power the robot will utilize.
 The motor shield is containing the H-bridge and will be the board for ensuring control of the different components and motors.
 TBD (hvad er der helt præcist på boarded?)
 
+TBD CPLD?
+
 \subsection{The H bridge}
 The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
 
-\subsection{The motors - Pololu}
+\subsection{Pololu 100:1 Micro Metal Gearmotor 6V High Power}
 
-%\begin{figure}[!ht]
-%	\centering
-%	\includegraphics[width=0.7\textwidth]{figures/pololu.jpg}
-%	\caption{\text{Pololu micro metal gear motors}}
-%	\label{Hardware diagram}
-%\end{figure}
+This is a small motor, drawing 120mA when there is no load, and 1600mA when stalling. They run up to 320 RPM; because of this, the robot will be able to move very rapidly. The ones used for the robot have an extended motor shaft, which makes it possible to utilize the Pololu motor encoders.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/pololu.jpg}
+	\caption{\text{Pololu micro metal gear motors}}
+	\label{Hardware diagram}
+\end{figure}
+
+\subsubsection{Pololu Magnetic Encoder Pair Kit}
+
+These encoders allow the transmission of data based on motor movement. It works by having the encoder board count the revolutions of the magnetic disc mounted on the board. It does this twelve times per revolution.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/pololuEncoder.jpg}
+	\caption{\text{Pololu Magnetic Encoder Pair Kit}}
+	\label{Hardware diagram}
+\end{figure}
 
 \section{The Bluetooth tranceiver}
 The robot will utilize the BlueSmiRF Silver bluetooth tranceiver. The transceiver is made by Sparkfun, it is utilized to make use of an GUI, by sending data from the MCU to the computer (GUI) by the use of bluetooth.\\ The bluetooth tranceiver makes it possible to monitor both the inputs and the logic behind the steering. The baudrate is between 2400-115200 bps and the tranceiver can be powered from 3.3v up to 6v. 
