@@ -150,9 +150,9 @@ if(this) {
 }
 \end{lstlisting}
 a CPLD is programmed with what is called Hardware description language or HDL for short.
-instead of writing condition statements like you do in C, you define logic blocks and describe what that logic block do with the inputs and outputs given.\\ \fixme{needs reference to \url{https://en.wikipedia.org/wiki/Hardware_description_language}}
+instead of writing condition statements like you do in C, you define logic blocks and describe what that logic block do with the inputs and outputs given. \cite{HDL}
 This allows for programming small logic circuits that act like several 74-series logic chips put together, but a CPLD can also be configured to contain a small microcontroller what internally can interpret machine code.\\ 
-This make a CPLD a very powerful device since it can be configured to anything that can be made with pure logic circuitry, given that the selected CPLD have the needed amount of internal configurable logic blocks for the implementation. \fixme{hører måske til i hardware. mangler ref til \url{https://en.wikipedia.org/wiki/Complex_programmable_logic_device}}
+This make a CPLD a very powerful device since it can be configured to anything that can be made with pure logic circuitry, given that the selected CPLD have the needed amount of internal configurable logic blocks for the implementation. \cite{CPLD}
 To simplify the programming, the IDE used to program the CPLD used on the motor shield, allows for programming by drawing schematics, which the IDE then synthensize and translate into the format the can be uploaded to the CPLD.\\
 The CPLD on the motor shield is configured to allow full individual control of each h-bridge by using 4 control lines from the PIC32 to the CPLD for each h-bridge:
 \begin{enumerate}
