@@ -6,10 +6,10 @@ Pulse Width Modulation is a very effective and straightforward way to control th
 PWM is used by utilizing Output Compare on the chip, which lets the chip generate pulses based on a timer. This is initialized in the following way:
 
 \section{Software flowchart}
-\fixme{insert software flowchart}
+\img{figures/softwareflowchart.png}{Software flowchart}{softwareflowchart}{0.9}
 \newpage
 \section{Pulse-width modulation}
-Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.\fixme{virker lidt underligt?}
+Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.\fixme{virker lidt underligt? gentager intro direkte}
 \begin{lstlisting}
 void initPWM() {
     int sysClk = 80000000; //FPB
@@ -41,11 +41,11 @@ void initPWM() {
     PR2 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
 }
 \end{lstlisting}
-\subsection {Why utilize pulse-width modulation}
+\subsection {Why utilize pulse-width modulation}\fixme{section needs readover}
 
 Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed autonomously \fixme{autonomously?}. 
  
-\subsection {Duty cycles}
+\subsection {Duty cycle}
 
 The duty cycle is used to describe how long the power is 'on' compared to 'off'. A higher duty cycle will yield more energy than a low one. The software uses a frequency of 1000Hz, which makes it straightforward to calculate to real time, if this is needed - it also provides enough precision to make the motors responsive quickly.
 The duty cycle can be changed by changing how long until the Output Compare sends a falling edge:
@@ -141,7 +141,29 @@ void controller(int midSensor, int rightSensor, int leftSensor){
 \end{lstlisting}
 \newpage
 \section{CPLD}
-\fixme{everything}
+Compared to a regular microprocessor like the PIC32MX320F128H that is programmed in C converted to machine code in a procedural manner:
+\begin{lstlisting}
+if(this) {
+	then this
+} else {
+	this
+}
+\end{lstlisting}
+a CPLD is programmed with what is called Hardware description language or HDL for short.
+instead of writing condition statements like you do in C, you define logic blocks and describe what that logic block do with the inputs and outputs given.\\ \fixme{needs reference to \url{https://en.wikipedia.org/wiki/Hardware_description_language}}
+This allows for programming small logic circuits that act like several 74-series logic chips put together, but a CPLD can also be configured to contain a small microcontroller what internally can interpret machine code.\\ 
+This make a CPLD a very powerful device since it can be configured to anything that can be made with pure logic circuitry, given that the selected CPLD have the needed amount of internal configurable logic blocks for the implementation. \fixme{hører måske til i hardware. mangler ref til \url{https://en.wikipedia.org/wiki/Complex_programmable_logic_device}}
+To simplify the programming, the IDE used to program the CPLD used on the motor shield, allows for programming by drawing schematics, which the IDE then synthensize and translate into the format the can be uploaded to the CPLD.\\
+The CPLD on the motor shield is configured to allow full individual control of each h-bridge by using 4 control lines from the PIC32 to the CPLD for each h-bridge:
+\begin{enumerate}
+	\item[•]Enable
+	\item[•]Direction A
+	\item[•]Direction B
+	\item[•]PWM
+\end{enumerate}
+Using these inputs without any logic control, allows for unwanted configurations of the h-bridge that will cause the power supply to be shortet to ground, this issues have been solved by programming the CPLD with a logic block that does not allow the configuration to occur, no matter the configuration of the input to the CPLD.\\
+\ref{hbridgecpldlogic} shows the logic configurations of one of the two logic blocks that have been programmed into the CPLD.
+\img{figures/cpldlogic.png}{Single h-bridge logic block}{hbridgecpldlogic}{0.8}
 \section{Part conclusion}
 
 \fixme{Software problemer og løsninger}
