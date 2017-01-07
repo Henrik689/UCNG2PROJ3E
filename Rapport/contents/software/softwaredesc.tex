@@ -1,27 +1,149 @@
 
-Beskriv Software section
+The following section will introduce the most important parts of the software for the project. The design of the software will be shown as a flow chart and described.
+The section will focus on the feedback loop used, but will also go through some of the smaller parts, such as PWM and the code used for the CPLD.
+
+Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.
+PWM is used by utilizing Output Compare on the chip, which lets the chip generate pulses based on a timer. This is initialized in the following way:
 
 \section{Software flowchart}
 TBD
+\newpage
 \section{Pulse-width modulation}
-TBD fyld?
 Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.
+\begin{lstlisting}
+void initPWM() {
+    int sysClk = 80000000; //FPB
+    int pwmFreq = 1000; //Desired frequence
+    int prescaleV = 1; 
+    int dutyCycle = 0;
+    
+    PMCONbits.ON = 0; //TBD bruger vi det?
+    PMAEN = 0;
+    
+    OC4CON = 0x0000; //Turn off the Output Compare while setting up
+    OC4R = 0x00638000; //Config compare Register, rising edge
+    OC4RS = 0x00638000; //Secondary compare Register, falling edge
+    OC4CON = 0x0006; //Turn on Output Compare in PWM mode
+    OC4RS = (PR4 + 1)*((float) dutyCycle / 100); //Sets the duty cycle, RS = time until falling edge starts
+    OC4CONSET = 0x8020; //Enable peripheral,  bit 5: 0=16 bit compare mode, 1=32 bit
+    
+    OC5CON = 0x0000; //Same as above
+    OC5R = 0x00638000;
+    OC5RS = 0x00638000;
+    OC5CON = 0x0006;
+    OC5RS = (PR2 + 1)*((float) dutyCycle / 100);
+    OC5CONSET = 0x8020;
+    
+    T2CONSET = 0x0008; //Starts a 32-bit timer
+    T2CONSET = 0x8000; //Enables the timer
 
+    PR4 = (sysClk / (pwmFreq * 2) * prescaleV) - 1; //Calculate how often the timer should trigger
+    PR2 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
+}
+\end{lstlisting}
 \subsection {Why utilize pulse-width modulation}
 
-Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed autonomously. 
+Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed autonomously TBD autonomously?. 
  
 \subsection {Duty cycles}
 
-The duty cycle is used to describe how long the power is 'on' compared to 'off'. A higher duty cycle will yield more energy than a low one. The programming uses a frequency of 1000Hz, which makes it straightforward to calculate to real time, if this is needed - it also provides enough precision to make the motors responsive quickly.
+The duty cycle is used to describe how long the power is 'on' compared to 'off'. A higher duty cycle will yield more energy than a low one. The software uses a frequency of 1000Hz, which makes it straightforward to calculate to real time, if this is needed - it also provides enough precision to make the motors responsive quickly.
+The duty cycle can be changed by changing how long until the Output Compare sends a falling edge:
 
-TBD Vores brug af pwm
+\begin{lstlisting}
+void adjustDuty(int channel, int duty) {//The function takes an argument based on which motors PWM should change, and the desired duty cycle
+    switch (channel) { 
+        case 1:
+            OC5RS = (PR2 + 1)*((float) duty / 100); //Sets the secondary register, to tell it how long until it should send a falling edge
+            break;
+        case 2:
+            OC4RS = (PR4 + 1)*((float) duty / 100);
+            break;
+    }
+}
+\end{lstlisting}
 
 \section{Feedback loop}
-TBD
+A feedback loop is a way of controlling how something, in this case a robot, behaves by receiving an output and adjusting the performance to match a desired output.\\
+The robot made in this project utilizes a feedback loop by firstly turning towards a set goal, and then avoiding obstacles along the way through sensors measuring the distance from the robot to the obstacle. If an obstacle gets too close, the robot will turn away from the obstacle and head back towards the goal.
+\subsection{Reading sensors}
+To know how far away an object is, some form of sensor feedback is needed. In this case, 3 ultrasound sensors have been implemented. The microprocessor sends a turn-on signal to the sensors, starts a timer and then waits until the sensors return with their own signal. The time between the start and finish signal can then be used to calculate the distance between the robot and the object.\\
+\begin{lstlisting}
+long readUltrasonic(int channel){  
+    long timerFinish = 0;
+    long timerOld = 0;
+    int timeout = 3000; //Sets a limit for how long the MCU waits for data
+    switch(channel){ //Switches between the 3 sensors
+        case 1:
+            Trigger1 = 1; //Pin RG6
+            DelayUs(10); //Sends a short pulse
+            Trigger1 = 0;
+            while(Echo1 == 0){} //Waits until pin RF6 is set to high
+            timerOld = micros(); //Sets the start timer to time since the program started, in microseconds
+            while(Echo1 == 1){ //While the sensors signal is high
+                timerFinish = micros(); //Sets the end timer to check for timeout
+                if(timerFinish - timerOld > timeout || timerFinish - timerOld < 0) //If the time to return is too high or below 0, return a default value
+                    return 500;
+            }
+            break;
+...
+    }
+    timerFinish = micros();
+    long result = ((timerFinish-timerOld)*0.34)/2; //Calculate distance from speed of sound, divided by 2 since the sound wave also needs to return to the sensor.
+    return result;  
+}
+\end{lstlisting}
+The short pulse sent in the beginning of the function has been set by the manufacturer: TBD: reference til http://www.micropik.com/PDF/HCSR04.pdf
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/sensorTiming.PNG}
+	\caption{\text{HC-SR04 timing diagram}}
+	\label{Timing diagram}
+\end{figure}
+
+To reduce false sensor data, which there seems to be a lot of with these sensors, a rolling average has been implemented. This calculates the average of the previous 5 readings instead of a single reading, allowing the robot to ignore spikes in data.
+\newpage
+\subsection{Feedback}
+The controller function takes the data from the 3 sensors and uses these to control how the robot should behave. The function is by no means fully optimized, but allows the robot to avoid obstacles in it's way.
+\begin{lstlisting}
+void controller(int midSensor, int rightSensor, int leftSensor){
+    int midDistance = 100; //Sets the limit for the sensors, in millimetres
+    int sideDistance = 50;
+    if(midSensor < midDistance) //First check the middle sensor
+    {
+        brake(); //Stops the motors
+        calculatePosition(); //Defunct, but should calculate where the robot is now in a coordinate system
+        backwards(); //Starts backing away from the object
+        int tachTarget = tach1-300; //Sets a tach target
+        while(tach1 > tachTarget){} //Drives backwards until hitting the target
+        brake(); //Brake again
+        presetTurnLeft(); //Turn 30 degrees left
+        brake();
+        forwards(); //Start driving forwards again
+    }
+    else if(leftSensor < sideDistance)
+    {
+        int tachTarget = tach1-20; //Sets the target tach
+        turnRight(); //Turn right
+        while(tachTarget > tach1){} //Until target tach is hit
+        brake(); //Brakes
+    }
+    else if(rightSensor < sideDistance) //Same as left, but reverse
+    {
+        int tachTarget = tach1+20;
+        turnLeft();
+        while(tachTarget < tach1){}
+        brake();
+    }
+    else
+        forwards(); //If no sensor is within the limit, just drive forwards
+}
+\end{lstlisting}
+\newpage
 \section{CPLD}
 TBD
 \section{Part conclusion}
+
 TBD Software problemer og løsninger
 
 TBD Hvorfor ikke RTOS?
