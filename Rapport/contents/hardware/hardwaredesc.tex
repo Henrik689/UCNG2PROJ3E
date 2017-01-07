@@ -12,15 +12,37 @@ In this section the different components of the hardware will be listed, describ
 	\label{Hardware diagram}
 \end{figure}
 
-The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The micro controller is receiving data from the 3 sensor sets; the ultrasound sensors, infrared light-sensors and the tachometer sensor.\ The micro controller then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will send it to the interface. \\ \\
 
 \section{Sensors and sensor concept}
-
-The robot will utilize two sets on sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
+\fixme{Skal skrives om til nuværende setup}
+The robot will utilize one set of sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
 The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
 
 \subsection{Choice of sensors}
 \fixme{everything}
+
+To find out what sensor to use in navigating the robot, two sensors were compared briefly on their specifications; The HC-SR04 and the PING))) Ultrasonic Distance Sensor.\\
+The specifications have been put into a table for a quick perspective into the sensing distance, volt, current and price for each sensor.\\
+
+As seen in the table, it's two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING))) and as seen in the table, it's a staggering price difference of 200,- DKK between the HR-SR04 and the PING))), which could be a huge factor when producing multiple devices.\\
+
+In the case of this project, the device available is the HC-SR04, even if the PING))) was available, the HC-SR04 has 4 pins compared to the PING))) with only 3 pins, this feature can make it easier to manage when coding the sensor and in this case making it the better choice.
+
+
+
+\begin{table}[!ht]
+\centering
+\caption{Sensor table}
+\label{Sensor table}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Name}           & HC-SR04   & PING)))    \\ \hline
+Max/min sensor distance & 4m-2cm    & 3m-2cm     \\ \hline
+Working current         & 15mA      & 30mA       \\ \hline
+Voltage                 & 5DC       & 5DC        \\ \hline
+Price                   & 10.50,- DKK & 211.74,- DKK \\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{Ultrasound sensor - HC-SR04}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
@@ -68,7 +90,7 @@ Some materials are very absorbent, which will result in less reflected ultrasoun
 
 \subsubsection{Mounting}
 
-TBD billede med lille tekst
+\fixme{TBD billede med lille tekst}
 %\begin{figure}[!ht]
 	%\centering
 	%\includegraphics[width=0.7\textwidth]{figures/mount.jpg}
