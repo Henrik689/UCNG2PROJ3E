@@ -6,10 +6,10 @@ Pulse Width Modulation is a very effective and straightforward way to control th
 PWM is used by utilizing Output Compare on the chip, which lets the chip generate pulses based on a timer. This is initialized in the following way:
 
 \section{Software flowchart}
-TBD
+\fixme{insert software flowchart}
 \newpage
 \section{Pulse-width modulation}
-Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.
+Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.\fixme{virker lidt underligt?}
 \begin{lstlisting}
 void initPWM() {
     int sysClk = 80000000; //FPB
@@ -43,7 +43,7 @@ void initPWM() {
 \end{lstlisting}
 \subsection {Why utilize pulse-width modulation}
 
-Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed autonomously TBD autonomously?. 
+Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed autonomously \fixme{autonomously?}. 
  
 \subsection {Duty cycles}
 
@@ -93,7 +93,7 @@ long readUltrasonic(int channel){
     return result;  
 }
 \end{lstlisting}
-The short pulse sent in the beginning of the function has been set by the manufacturer: TBD: reference til http://www.micropik.com/PDF/HCSR04.pdf
+The short pulse sent in the beginning of the function has been set by the manufacturer: \fixme{reference til http://www.micropik.com/PDF/HCSR04.pdf}
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/sensorTiming.PNG}
@@ -141,11 +141,10 @@ void controller(int midSensor, int rightSensor, int leftSensor){
 \end{lstlisting}
 \newpage
 \section{CPLD}
-TBD
+\fixme{everything}
 \section{Part conclusion}
 
-TBD Software problemer og løsninger
+\fixme{Software problemer og løsninger}
+\fixme{Hvorfor ikke RTOS?}
 
-TBD Hvorfor ikke RTOS?
-
-TBD hvilke krav har vi droppet?
+\fixme{hvilke krav har vi droppet?}

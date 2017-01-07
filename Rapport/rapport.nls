@@ -1,5 +1,13 @@
 \begin{thenomenclature} 
+
  \nomgroup{A}
+
+  \item [{3D print}]\begingroup 3-Dimensional printing\nomeqref {0}
+		\nompageref{1}
+  \item [{ADC}]\begingroup Analog-digital conversion\nomeqref {0}
+		\nompageref{1}
+  \item [{GUI}]\begingroup Graphical User Interface\nomeqref {0}
+		\nompageref{1}
   \item [{IDE}]\begingroup Integrated Development Environment\nomeqref {0}
 		\nompageref{1}
   \item [{MCU}]\begingroup Microcontroller Unit\nomeqref {0}
@@ -16,4 +24,3 @@
 		\nompageref{1}
 
 \end{thenomenclature}
-

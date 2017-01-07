@@ -1,13 +1,13 @@
 \section{Description of the hardware structure and functionality}
  
-TBD mere fyld og billede
+\fixme{mere fyld og billede}
 In this section the different components of the hardware will be listed, described and explained.\
 
 
 \section{Hardware diagram}
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figures/hardwareDIA.jpg}
+	\includegraphics[width=0.7\textwidth]{figures/UdklipDIA2.png}
 	\caption{\text{Hardware diagram with arrows}}
 	\label{Hardware diagram}
 \end{figure}
@@ -20,7 +20,7 @@ The robot will utilize two sets on sensors - one set of QRE1113 sensors, which w
 The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
 
 \subsection{Choice of sensors}
-TBD
+\fixme{everything}
 
 \subsection{Ultrasound sensor - HC-SR04}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
@@ -32,7 +32,7 @@ When a robot should be able avoid obstacles it will need a device to inform the 
 	\label{Hardware diagram}
 \end{figure}
 
-TBD Mere om denne sensor
+\fixme{Mere om denne sensor}
  
 The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\
 
@@ -89,7 +89,7 @@ TBD billede med lille tekst
 %	\label{Hardware diagram}
 %\end{figure}
 
-\section{The chipKIT Uno32 board}
+\section{The chipKIT Uno32 board}\fixme{section need readover}
 The robot will utilize the chipKIT Uno 32 board to execute code. The board
 was chosen both due to past experiences, but also because the robot would need
 line-following properties, and we had already written a functional line-following robot
@@ -103,10 +103,24 @@ becomes more straightforward. It's fast enough to execute the code, and works we
 input power the robot will utilize.
 
 \section{The motor shield}
-The motor shield is containing the H-bridge and will be the board for ensuring control of the different components and motors.
-TBD (hvad er der helt præcist på boarded?)
-
-TBD CPLD?
+The motor shield is the single add on board used in the project, and contains all the features needed for making the robot work.
+The features are:
+\begin{enumerate}
+	\item[•]Dual H-bridges.
+	\item[•]Low side current sensor for each H-bridge.
+	\item[•]CPLD for reconfigurable H-bridge logic control.
+	\item[•]All connectors needed for sensors and other units needed:
+	\begin{enumerate}
+		\item[•]Screw terminal for motor connection.
+		\item[•]Screw terminal for input power.
+		\item[•]Molex connector for ultrasound distance Sensor.
+		\item[•]Molex connector for  distance sensor.
+		\item[•]Molex connector for motor encoder.
+		\item[•]Molex connector for infrared light sensor.
+		\item[•]Header for Bluetooth module.
+	\end{enumerate}
+\end{enumerate}
+\fixme{INDSÆT BILLEDE AF SHIELD}
 
 \subsection{The H bridge}
 The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
