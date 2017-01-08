@@ -56,26 +56,19 @@ The way the ultrasound sensor works is by emitting acoustic waves and then waits
 
 What is causing the device to make ultrasonic sound is a piezoelectric crystal. The crystal is receiving a rapid oscillating electrical signal, this causes the crystal to expand and contract and thereby creating a sound wave.\ The sound waves will then after being reflected return to a piezoelectric receiver which can then convert the waves into voltage by using the same method as explained above. \\
 
-There are several popular ways to process the information gathered from the ultrasound sensor.\
-\begin{enumerate}
-	\item[•]Time of flight
-	\item[•]Doppler shift
-	\item[•]Amplitude attenuation
-\end{enumerate}
-
 In the scope of the project, the robot will be using "Time of flight" for sensing the distance between itself and the obstacle.\
 
-When working with the term time of flight, it means the ultrasound sensor only generates pulses of sound instead of an continuous streak of sound waves. to avoid confusion. In high speed situations this will mean there is waiting time limits.\\ 
+The ultrasound sensor only generates pulses of sound instead of an continuous streak of sound waves. to avoid confusion. In high speed situations this will mean there is waiting time limits.\\ 
 
 The calculation for using the ultrasound sensor is:\\
 
 t = time\\
-r = distance travelled\\
-c = speed of light\\
+r = distance to object\\
+c = speed of sound\\
 
-r= c*t\\
+r = c*t/2\\
 
-With this the robot can calculate the time of flight.\
+With this the robot can calculate the distance to the object.\
 
 \subsubsection{Considerations:}
 When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration.\\ Temperature and humidity can affect the speed of sound, just as air currents have been known to be able to create invisible boundaries that can reflect ultrasonic waves.\\
