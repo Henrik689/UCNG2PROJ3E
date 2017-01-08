@@ -42,9 +42,6 @@ void initPWM() {
     PR2 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
 }
 \end{lstlisting}
-\subsection {Why utilize pulse-width modulation}\fixme{section needs readover}
-
-Pulse-width modulation, or PWM, is a way to regulate power distribution within a system. It is a software solution that manages when a device receives power, and for how long at a time it does this. This is called a duty cycle. The robot utilizes PWM for its motors, to regulate how quickly it moves. PWM can be compared to turning a switch on and off extremely quickly - much more quickly than what will affect the performance of the motors. Effectively, this means that the robot's programming will now be able to regulate speed - specifically, it starts of slow to give more lenience in the sensor readings. 
  
 \subsection {Duty cycle}
 
@@ -94,7 +91,7 @@ long readUltrasonic(int channel){
     return result;  
 }
 \end{lstlisting}
-The short pulse sent in the beginning of the function has been set by the manufacturer: \fixme{reference til http://www.micropik.com/PDF/HCSR04.pdf}
+The short pulse sent in the beginning of the function has been set by the manufacturer: \cite{HCSR04Datasheet}
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/sensorTiming.PNG}
@@ -175,9 +172,8 @@ Using these inputs without any logic control, allows for unwanted configurations
 %\img{figures/cpldlogic.png}{Single h-bridge logic block}{hbridgecpldlogic}{0.8}
 
 \section{Part conclusion}
-
-The very first issue with the software came 
+A few issues occurred during the development of the software,
 \fixme{Software problemer og løsninger}
-Another consideration has been to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constricted systems, however, the system used in this project does fine without, since reading all 3 sensors take less than 10 ms.
+Another consideration has been to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constricted systems, however, the system used in this project does fine without, since reading all 3 sensors take less than 10 ms.\\
 
 Due to time constraints, a few requirements for the project have not been met. These include the need for line following capabilities, localization and the ability to return to a path that leads to goal.
