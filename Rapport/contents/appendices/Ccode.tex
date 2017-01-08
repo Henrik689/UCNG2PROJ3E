@@ -1,9 +1,460 @@
 \section{C code}
 main.c:
 
-%\begin{lstlisting}
-%\end{lstlisting}
+\begin{lstlisting}
+//**** GLOBAL INCLUDES ****//
+#include <xc.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#define _SUPPRESS_PLIB_WARNING 1   
+#define _DISABLE_OPENADC10_CONFIGPORT_WARNING 1  
+#include <plib.h>
+#include <math.h>
+
+//**** PROJECT INLCUDES ****//
+#include "setup.h"
+#include "Functions.h"
+#include "vehicle.h"
+#include "UART.h"
+#include "Delay.h"
+#include "ADC.h"
+
+//**** VARIABLE DEFINITIONS ****//
+long tach1 = 0, tach2 = 0;
+int goalX = 50;
+int goalY = 200;
+int printTimer = 0;
+double angle = 0;
+int currentX;
+int currentY;
+int currentTach = 0;
+long Ultrasound[3];
+int PWM[] = {25,25};
+char str[10+1];
+double rollingData[3][5] = {{500,500,500,500,500},
+                            {500,500,500,500,500},
+                            {500,500,500,500,500}  };
+int rollingAverage[3];
+
+//**** INTERRUPT SERVICE ROUTINE ****//
+void __ISR(_EXTERNAL_1_VECTOR, IPL4SOFT) INT1Interrupt(){
+    asm volatile("di");
+    if(PORTDbits.RD10 == 0 && PORTDbits.RD5 == 1)//Right wheel backwards
+        tach1--;
+    else if(PORTDbits.RD10 == 1 && PORTDbits.RD5 == 0)//Right wheel forwards
+        tach1++;
+    IFS0bits.INT1IF = 0;
+    asm volatile("ei");
+}
+
+int main(int argc, char** argv) {
+    int i = 0;
+    int j = 0;
+    
+    //**** INITIALIZATIONS ****//
+    UART1Init(115200, 1);
+    sensorIOInit();
+    startEngines();
+    initInterrupt();
+    initTimer();
+    initPWM();
+    
+    UART1WriteLn("Starting");
+    
+    adjustDuty(1,PWM[0]);
+    adjustDuty(2,PWM[1]);
+    initialTurn(goalX,goalY);
+    forwards();
+    
+    for (;;){
+        rollingAverage();
+        controller(rollingAverage[0],rollingAverage[1],rollingAverage[2]);
+    }
+}
+\end{lstlisting}
 \newpage
-ADC.c:
-%\begin{lstlisting}
-%\end{lstlisting}
+
+functions.c
+\begin{lstlisting}
+#include <xc.h>
+#include "Delay.h"
+#include <stdint.h>
+#include <math.h>
+
+#define Trigger1S TRISGbits.TRISG6
+#define Echo1S TRISFbits.TRISF6
+#define Trigger2S TRISEbits.TRISE7
+#define Echo2S TRISEbits.TRISE2
+#define Trigger3S TRISEbits.TRISE3
+#define Echo3S TRISDbits.TRISD0
+
+#define Trigger1 PORTGbits.RG6
+#define Echo1 PORTFbits.RF6
+#define Trigger2 PORTEbits.RE7
+#define Echo2 PORTEbits.RE2
+#define Trigger3 PORTEbits.RE3
+#define Echo3 PORTDbits.RD0
+
+
+double tachPerCm = 16.667;
+int wheelbase = 9;
+extern long tach1;
+extern long tach2;
+extern double angle;
+extern int currentX;
+extern int currentY;
+extern int currentTach;
+extern int rollingData;
+extern int rollingAverage;
+
+void initInterrupt(){
+    INTEnableSystemMultiVectoredInt();
+    IEC0bits.INT1IE = 0;
+    INTCONbits.INT1EP = 0;
+    IPC1bits.INT1IP = 4;
+    IEC0bits.INT1IE = 1;
+}
+
+void initTimer(){
+    T4CON = 0x0;              // Stop any 16/32-bit Timer4 operation 
+    T5CON = 0x0;              // Stop any 16-bit Timer5 operation 
+    T4CONSET = 0x0038;        // Enable 32-bit mode, prescaler 1:8, internal peripheral clock source
+    TMR4 = 0x0;               // Clear contents of the TMR4 and TMR5
+    PR4 = 0xFFFFFFFF;          // Load PR4 and PR5 registers with 32-bit value
+    T4CONSET = 0x8000;
+}
+
+void dec_to_str(char* str, long val, size_t digits) {
+    size_t i = 1u;
+    for (; i <= digits; i++) {
+        str[digits - i] = (char) ((val % 10u) + '0');
+        val /= 10u;
+    }
+    str[i - 1u] = '\0'; // assuming you want null terminated strings?
+}
+
+long map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+void initPWM() {
+    int sysClk = 80000000;
+    int pwmFreq = 1000;
+    int prescaleV = 1;
+    int dutyCycle = 0;
+    
+    PMCONbits.ON = 0;
+    PMAEN = 0;
+    
+    OC4CON = 0x0000;
+    OC4R = 0x00638000;
+    OC4RS = 0x00638000;
+    OC4CON = 0x0006;
+    OC4RS = (PR4 + 1)*((float) dutyCycle / 100);
+    OC4CONSET = 0x8020; //Enable peripheral, bit 5: 0=16 bit compare mode 1=32 bit
+    
+    OC5CON = 0x0000;
+    OC5R = 0x00638000;
+    OC5RS = 0x00638000;
+    OC5CON = 0x0006;
+    OC5RS = (PR2 + 1)*((float) dutyCycle / 100);
+
+    T2CONSET = 0x0008;
+    T2CONSET = 0x8000;
+    
+    OC5CONSET = 0x8020;
+    
+    PR4 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
+    PR2 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
+}
+
+void sensorIOInit(){
+    Trigger1S = 0;
+    Echo1S = 1;
+    Trigger2S = 0;
+    Echo2S = 1;
+    Trigger3S = 0;
+    Echo3S = 1;
+}
+
+void adjustDuty(int channel, int duty) {
+    switch (channel) {
+        case 1:
+            OC5RS = (PR2 + 1)*((float) duty / 100);
+            break;
+        case 2:
+            OC4RS = (PR4 + 1)*((float) duty / 100);
+            break;
+    }
+}
+
+long micros(){
+    long result = ((TMR5<<16)+(TMR4<<0))/5; //Timer5: last 16 bits in timer, bitshift to get a proper result
+    return result;
+}
+
+long millis(){
+    long result = ((TMR5<<16)+(TMR4<<0))/5;
+    return result/1000;
+}
+
+long readUltrasonic(int channel){  
+    long timerFinish = 0;
+    long timerOld = 0;
+    int timeout = 3000; 
+    switch(channel){
+        case 1:
+            Trigger1 = 1;
+            DelayUs(10);
+            Trigger1 = 0;
+            while(Echo1 == 0){}
+            timerOld = micros();
+            while(Echo1 == 1){
+                timerFinish = micros();
+                if(timerFinish - timerOld > timeout || timerFinish - timerOld < 0)
+                    return 500;
+            }
+            break;
+        case 2:
+            Trigger2 = 1;
+            DelayUs(10);
+            Trigger2 = 0;
+            while(Echo2 == 0){}
+            timerOld = micros();
+            while(Echo2 == 1){
+                timerFinish = micros();
+                if(timerFinish - timerOld > timeout || timerFinish - timerOld < 0)
+                    return 500;
+            }
+            break;
+        case 3:
+            Trigger3 = 1;
+            DelayUs(10);
+            Trigger3 = 0;
+            while(Echo3 == 0){}
+            timerOld = micros();
+            while(Echo3 == 1){
+                timerFinish = micros();
+                if(timerFinish - timerOld > timeout || timerFinish - timerOld < 0)
+                    return 500;
+            }
+            break;
+        default:
+            UART1Write("Default state");
+            break;
+    }
+    timerFinish = micros();
+    long result = ((timerFinish-timerOld)*0.34)/2;
+    return result;  
+}
+
+double angleToTach(int angle)
+{
+    return angle*3.14159/180*wheelbase/2*tachPerCm;
+}
+
+void initialTurn(int x, int y){
+    tach1 = 0;
+    char str[10+1];
+    double angleRadians = atan(y/x);
+    int angleD = angleRadians*180/3.14159; //Convert to degrees
+    double tachToTurn = angleToTach(angleD);
+    turnLeft();
+    while(tach1 < tachToTurn){}
+    brake();
+    angle = angleRadians;
+}
+
+void presetTurnLeft()
+{
+    int tachTarget = tach1+angleToTach(30); //tachCount right //Calculate how far the wheel must turn to get 30 degrees using the arc length of a circular sector
+    DelayMs(50);
+    turnLeft();
+    while(tachTarget > tach1){}
+    forwards();
+    DelayMs(50);
+}
+
+void presetTurnRight()
+{
+    int tachTarget = tach1-angleToTach(30); //tachCount right //Calculate how far the wheel must turn to get 30 degrees using the arc length of a circular sector
+    while(tachTarget > tach1)
+        turnRight();
+}
+
+void calculatePosition()
+{
+    int distanceRun = tach1-currentTach; //How far has it run since last calculation
+    currentX = currentX+cos(angle)*distanceRun; //Calculate position on coordinate
+    currentY = currentY+sin(angle)*distanceRun;
+    currentTach = tach1; //Reset 0-position
+}
+
+void rollingAverage(){
+    int i;
+    int j;
+    for(i=0;i<3;i++){ //Run through once per sensor
+        double tempData = readUltrasonic(i+1); //Save the data on current sensor
+        if(tempData < 10000 && tempData > 0){ //To avoid huge and negative numbers
+            rollingData[i][4] = tempData; //Save data on the last spot in the array
+            rollingAverage[i]=(rollingData[i][0]+rollingData[i][1]+rollingData[i][2]+rollingData[i][3]+rollingData[i][4])/5; //Calculate average from last 5 readings
+        }
+        for(j=0;j<4;j++){
+            rollingData[i][j]=rollingData[i][j+1]; //Move all data one spot left in the arrays
+        }
+    }
+}
+
+void controller(int midSensor, int rightSensor, int leftSensor){
+    int midDistance = 100;
+    int sideDistance = 50;
+    if(midSensor < midDistance)
+    {
+        brake();
+        calculatePosition();
+        backwards();
+        int tachTarget = tach1-300;
+        while(tach1 > tachTarget){}
+        brake();
+        presetTurnLeft();
+        brake();
+        forwards();
+    }
+    else if(leftSensor < sideDistance)
+    {
+        int tachTarget = tach1-20;
+        turnRight();
+        while(tachTarget > tach1){}
+        brake();
+
+    }
+    else if(rightSensor < sideDistance)
+    {
+        int tachTarget = tach1+20;
+        turnLeft();
+        while(tachTarget < tach1){}
+        brake();
+    }
+    else
+        forwards();
+}
+\end{lstlisting}
+
+vehicle.c
+\begin{lstlisting}
+#include <xc.h>
+#include "Delay.h"
+#include <stdint.h>
+
+//HB1A
+#define HB1ASetup TRISDbits.TRISD10
+#define HB1A PORTDbits.RD10
+//HB1B
+#define HB1BSetup TRISDbits.TRISD5
+#define HB1B PORTDbits.RD5
+//H1PWM
+#define HB1PWMSetup TRISDbits.TRISD3
+#define HB1PWM PORTDbits.RD3
+//HB1DIR
+#define HB1EnableSetup TRISDbits.TRISD11
+#define HB1Enable PORTDbits.RD11
+
+//HB2A
+#define HB2ASetup TRISDbits.TRISD6
+#define HB2A PORTDbits.RD6
+//HB2B
+#define HB2BSetup TRISGbits.TRISG8
+#define HB2B PORTGbits.RG8
+//HB2PWM
+#define HB2PWMSetup TRISDbits.TRISD4
+#define HB2PWM PORTDbits.RD4
+//HB2DIR
+#define HB2EnableSetup TRISDbits.TRISD7
+#define HB2Enable PORTDbits.RD7
+
+void startEngines()
+{
+    HB1ASetup = 0;
+    HB1BSetup = 0;
+    HB1EnableSetup = 0;
+    
+    HB2ASetup = 0;
+    HB2BSetup = 0;
+    HB2EnableSetup = 0;
+    
+    HB1Enable= 1;
+    HB1A = 0;
+    HB1B = 0;
+    
+    HB2Enable= 1;
+    HB2A = 0;
+    HB2B = 0;
+}
+void forwards()
+{
+    HB1Enable = 0;
+    HB2Enable = 0;
+    
+    HB1A = 1;
+    HB1B = 0;
+    HB2A = 1;
+    HB2B = 0;
+    
+    HB1Enable = 1;
+    HB2Enable = 1;
+}
+void backwards()
+{
+    HB1Enable = 0;
+    HB2Enable = 0;
+    
+    HB1A = 0;
+    HB1B = 1;
+    HB2A = 0;
+    HB2B = 1;
+    
+    HB1Enable = 1;
+    HB2Enable = 1;
+}
+void brake()
+{
+    HB1Enable = 0;
+    HB2Enable = 0;
+    
+    HB1A = 1;
+    HB1B = 1;
+    HB2A = 1;
+    HB2B = 1;
+    
+    HB1Enable = 1;
+    HB2Enable = 1;
+}
+void turnLeft()
+{
+    HB1Enable = 0;
+    HB2Enable = 0;
+
+    HB1A = 1;
+    HB1B = 0;
+    HB2A = 0;
+    HB2B = 1;
+    
+    HB1Enable = 1;
+    HB2Enable = 1;
+}
+void turnRight()
+{
+    HB1Enable = 0;
+    HB2Enable = 0;
+    
+    HB1A = 0;
+    HB1B = 1;
+    HB2A = 1;
+    HB2B = 0;
+    
+    HB1Enable = 1;
+    HB2Enable = 1;
+}
+\end{lstlisting}
