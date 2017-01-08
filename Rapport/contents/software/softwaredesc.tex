@@ -172,8 +172,7 @@ Using these inputs without any logic control, allows for unwanted configurations
 %\img{figures/cpldlogic.png}{Single h-bridge logic block}{hbridgecpldlogic}{0.8}
 
 \section{Part conclusion}
-A few issues occurred during the development of the software,
-\fixme{Software problemer og løsninger}
-Another consideration has been to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constricted systems, however, the system used in this project does fine without, since reading all 3 sensors take less than 10 ms.\\
-
+A few issues occurred during the development of the software, most importantly being the localization code. This part was omitted from the final project due to time constraints since it is only half way done. The code should have functioned by calculating the distance the robot has travelled by using cosine and sine functions, since it was always possible to generate a theoretical triangle from where the bot starts and where it starts turning.\\
+This also meant that the calculations for turning towards the goal after avoiding an object did not work, since this was planned to be made from the robots position relative to the start and end point.\\\\
+A consideration made in the project was to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constricted systems, however, the system used in this project does fine without, since reading all 3 sensors take less than 10 ms.\\\\
 Due to time constraints, a few requirements for the project have not been met. These include the need for line following capabilities, localization and the ability to return to a path that leads to goal.

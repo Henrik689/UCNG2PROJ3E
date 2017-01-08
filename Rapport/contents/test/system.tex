@@ -1,7 +1,14 @@
 \section{System Testing}
- \fixme{skriv test}
 \subsubsection{Equipment}
-
+\begin{enumerate}
+	\item[•]Elcanic Power Supply
+\end{enumerate}
 \subsubsection{Setup}
-
+A small course was made for the robot to run, consisting of a 400x200cm area with the start at 0x0 and end at 400x200. A few objects were placed on the course for the robot to avoid. The robot was powered through the power supply for easy shut off of power if necessary.\\
+This test was done a few times to get a consistent result.
 \subsubsection{Results}
+The initial turn of the robot towards the end point worked fine, although the motors on the robot being quite aggressive, making the robot jump a bit when breaking, resulting in slight misalignments.\\
+Whenever the robot detected an object, decent adjustments were made to the route driven, though some were a bit too hard, making the robot turn very far away from the object.\\ 
+Whenever the robot encountered an object directly in front of it, it was clear to see that the distance it backed was too large, and was reduced significantly. Furthermore, the distance for the front sensor was seen to be too small, making the robot react too late for certain objects and was increased to more than double the initial value.\\
+During testing, one of the motors started having problems, ultimately leading to the motor cutting off completely.\\
+Because of the localization code not functioning, an acceptable test was never found, not helped by the malfunctioning motor. 
