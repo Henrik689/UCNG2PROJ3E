@@ -106,18 +106,11 @@ For putting the sensors in place facing the right directions, a 3D-printed mount
 %	\label{Hardware diagram}
 %\end{figure}
 
-\section{The chipKIT Uno32 board}\fixme{section need readover}
-The robot will utilize the chipKIT Uno 32 board to execute code. The board
-was chosen both due to past experiences, but also because the robot would need
-line-following properties, and we had already written a functional line-following robot
-previously, which also included some important features, including PID control and 
-pulse-width modulation patterns. \\
-This enabled a lot of recycled code, which was a strong point
-in the Uno 32's favor due to time constraints. \\
+\section{The chipKIT Uno32 board}
+The robot will utilize the chipKIT Uno32 board to execute code and act as a controller for the sensors, motors, and the Bluetooth module. The board
+was chosen both due to past experiences. It's proven to be simple to work with and provide multiple ports to make it possible to utilize more than enough modules for the robot's functionality.
 
-The board is also compatible with Arduino shields, and as such designing the H-bridge for it
-becomes more straightforward. It's fast enough to execute the code, and works well within the
-input power the robot will utilize.
+The board is also compatible with Arduino shields, and as such designing the H-bridge for it becomes more straightforward. It's fast enough to execute the code, and works well within the input power range that the robot will operate within.
 
 \section{The motor shield}
 The motor shield is the single add on board used in the project, and contains all the features needed for making the robot work.
