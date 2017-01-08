@@ -1,17 +1,44 @@
-\subsection{H-Bridge} \fixme{jeg retter igennem når jeg er kommet hjem. Henrik.}
+\subsection{H-Bridge}
+The purpose of this test is to verify that the two h-bridges functions as intended.
 
 \subsubsection{Equipment}
 \begin{enumerate}
 	\item[•]Elcanic Power Supply
 	\item[•]Fluke 45 Multimeter
+	\item[•]ChipKit Uno32 Microcontroller
 \end{enumerate}
 
 \subsubsection{Setup}
-Power to the H-bridge is supplied by the power supply. Current and voltage will be measured by the multimeter.
-All of the MOSFET's were removed before doing the test. It was done to avoid powering the engines.
-
+The h-bridge i controlled with the Uno32 through the logic circuit programmed into the CPLD. The Current draw and voltage of the entire system is measured with two Fluke 45 multimeters. Input power is supplied by the Elcanic power supply.\\
+The Uno32 is programmed to test the h-bridge in the following four configurations:
+\begin{enumerate}
+	\item[•]Coast
+	\item[•]Power from top left to bottom right
+	\item[•]Power from top right to bottom left
+	\item[•]Break
+\end{enumerate}
 
 \subsubsection{Results}
+\begin{table}[]
+\centering
+\begin{tabular}{l|l|l}
+\textbf{H-bridge 1} & \textbf{H-bridge 2} & \textbf{Over Current} \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Coast               & Off                 & No                    \\ \hline
+Power Dir A         & Off                 & Yes                   \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Power Dir A         & Off                 & No                    \\ \hline
+Break               & Off                 & Yes                   \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Off                 & Coast               & No                    \\ \hline
+Off                 & Power Dir A         & No                    \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Off                 & Power Dir A         & No                    \\ \hline
+Off                 & Break               & No                   
+\end{tabular}
+\caption{Results from first test of h-bridge}
+\label{firsthbridgetest}
+\end{table}
 There was a suspicion concerning the H-bridge, it had been measured that there was an error or a damaged component. The affected suspected part was the H-bridge for the left motor.\\
 
 All of the transistors were tested on the part of the H-bridge in question.
