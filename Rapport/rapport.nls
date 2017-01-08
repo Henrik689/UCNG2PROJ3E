@@ -2,25 +2,27 @@
 
  \nomgroup{A}
 
-  \item [{3D print}]\begingroup 3-Dimensional printing\nomeqref {0}
-		\nompageref{1}
-  \item [{ADC}]\begingroup Analog-digital conversion\nomeqref {0}
-		\nompageref{1}
-  \item [{GUI}]\begingroup Graphical User Interface\nomeqref {0}
+   \item [{PWM}]\begingroup Pulse-width Modulation\nomeqref {0}
 		\nompageref{1}
   \item [{IDE}]\begingroup Integrated Development Environment\nomeqref {0}
 		\nompageref{1}
   \item [{MCU}]\begingroup Microcontroller Unit\nomeqref {0}
 		\nompageref{1}
-  \item [{PCB}]\begingroup Printed Circuit Board\nomeqref {0}
-		\nompageref{1}
-  \item [{PID}]\begingroup Proportional-integral-derivative\nomeqref {0}
-		\nompageref{1}
-  \item [{PWM}]\begingroup Pulse-width modulation\nomeqref {0}
-		\nompageref{1}
-  \item [{THT}]\begingroup Through-hole-technology\nomeqref {0}
-		\nompageref{1}
   \item [{UART}]\begingroup Universal Asynchronous Receiver/Transmitter\nomeqref {0}
+		\nompageref{1}	
+  \item [{IDE}]\begingroup Integrated Development Environment\nomeqref {0}
 		\nompageref{1}
-
+  \item [{DC}]\begingroup Direct Current\nomeqref {0}
+		\nompageref{1}
+  \item [{NPN}]\begingroup Negative-Positive-Negative\nomeqref {0}
+		\nompageref{1}
+  \item [{CPLD}]\begingroup Complex Programmable Logic Device\nomeqref {0}
+		\nompageref{1}
+  \item [{RTOS}]\begingroup Real-Time Operating System\nomeqref {0}
+		\nompageref{1}
+  \item [{MOSFET}]\begingroup Metal-Oxide-Semiconductor-Field-Effect Transistor\nomeqref {0}
+		\nompageref{1}
+  \item [{TACH}]\begingroup Tachometer - an instrument measuring the rotation speed of a shaft or disk, as in a motor or other machine\nomeqref {0}
+		\nompageref{1}
+		
 \end{thenomenclature}

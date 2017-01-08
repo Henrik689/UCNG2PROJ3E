@@ -164,7 +164,16 @@ The CPLD on the motor shield is configured to allow full individual control of e
 \end{enumerate}
 Using these inputs without any logic control, allows for unwanted configurations of the h-bridge that will cause the power supply to be shortet to ground, this issues have been solved by programming the CPLD with a logic block that does not allow the configuration to occur, no matter the configuration of the input to the CPLD.\\
 \ref{hbridgecpldlogic} shows the logic configurations of one of the two logic blocks that have been programmed into the CPLD.
-\img{figures/cpldlogic.png}{Single h-bridge logic block}{hbridgecpldlogic}{0.8}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/cpldlogic.png}
+	\caption{\text{Single h-bridge logic block}}
+	\label{hbridgecpldlogic}
+\end{figure}
+\newpage
+%\img{figures/cpldlogic.png}{Single h-bridge logic block}{hbridgecpldlogic}{0.8}
+
 \section{Part conclusion}
 
 The very first issue with the software came 
