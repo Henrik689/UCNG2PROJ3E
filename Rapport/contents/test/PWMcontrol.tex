@@ -1,7 +1,37 @@
 \subsection{PWM motor control}
+The purpose of this test is to verify if the DC motor can be controlled by the PWM signal comming from the Uno32 going to the H-bridge.
  
 \subsubsection{Equipment}
+\begin{enumerate}
+	\item[•]Agilent MSO-X 3024A Oscilloscope
+	\item[•]ChipKit Uno32 Microcontroller
+	\item[•]Elcanic Power Supply
+\end{enumerate}
  
 \subsubsection{Setup}
+The Uno32 is used to generate the control signals used for the H-bridge with varying PWM duty cycles. the DC RMS Voltage is measured with the oscilloscope on both terminals.
+the H-bridge input power is provided by the Elcanic power supply.
  
 \subsubsection{Results}
+All test was done with a supply voltage at 7.19V
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Duty Cycle} & \textbf{DC RMS Voltage} \\ \hline
+0\%                 & 0V                      \\ \hline
+10\%                & 4.10V                   \\ \hline
+20\%                & 4.72V                   \\ \hline
+30\%                & 5.27V                   \\ \hline
+40\%                & 5.65V                   \\ \hline
+50\%                & 5.99V                   \\ \hline
+60\%                & 6.22V                   \\ \hline
+70\%                & 6.49V                   \\ \hline
+80\%                & 6.73V                   \\ \hline
+90\%                & 6.93V                   \\ \hline
+100\%               & 7.07V                   \\ \hline
+\end{tabular}
+\caption{Dc motor control with PWM results}
+\label{dcpwmresults}
+\end{table}\\
+The test shows that the motor shield is able to control the DC motor with PWM allowing for the Uno32 to control the amount of power delivered to the motors.

@@ -5,6 +5,7 @@ The purpose of this test is to verify that CPLD performs the correct logic task 
 	\item[•]Agilent MSO-X 3024A Oscilloscope
 	\item[•]Agilent 54620-61601 Logic Analyzer Probe Cable
 	\item[•]ChipKit Uno32 Microcontroller
+	\item[•]Elcanic Power Supply
 \end{enumerate}
 
 \subsubsection{Setup}
@@ -14,7 +15,7 @@ For the test logic probes was used to analyze the logic signals comming from the
 To compress the results the output will be in the following format:
 \begin{table}[h]
 \centering
-\scalebox{0.9}{
+\scalebox{0.8}{
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
 \multicolumn{4}{|l|}{\textbf{Logic Input}} & \multicolumn{4}{l|}{\textbf{Expected output}} & \multicolumn{4}{l|}{\textbf{Recieved output}} \\ \hline
@@ -24,11 +25,10 @@ Bit 3       & 2         & 1       & 0      & Bit 3        & 2          & 1      
 \caption{Results example}
 \label{resultsexample}
 \end{table}
-
 The results are from testing according to the truth table used to create the logic circuit programmed into the CPLD.
 \begin{table}[]
 \centering
-\scalebox{0.9}{
+\scalebox{0.8}{
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{Logic Input} & \textbf{Expected output} & \textbf{Recieved output} & \textbf{Pass} \\ \hline
