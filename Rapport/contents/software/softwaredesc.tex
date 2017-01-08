@@ -9,7 +9,8 @@ PWM is used by utilizing Output Compare on the chip, which lets the chip generat
 \img{figures/softwareflowchart.png}{Software flowchart}{softwareflowchart}{0.9}
 \newpage
 \section{Pulse-width modulation}
-Pulse Width Modulation is a very effective and straightforward way to control the speed of the robot rapidly. It works by limiting how long the of a given period the power is 'on' compared to 'off'.\fixme{virker lidt underligt? gentager intro direkte}
+The robot utilizes pulse-width modulation by initiating a desired frequency, setting up the output compare, starting a timer, and then finally calculating the trigger timing of the timer.
+
 \begin{lstlisting}
 void initPWM() {
     int sysClk = 80000000; //FPB
@@ -17,7 +18,7 @@ void initPWM() {
     int prescaleV = 1; 
     int dutyCycle = 0;
     
-    PMCONbits.ON = 0; //TBD bruger vi det?
+    PMCONbits.ON = 0; 
     PMAEN = 0;
     
     OC4CON = 0x0000; //Turn off the Output Compare while setting up
