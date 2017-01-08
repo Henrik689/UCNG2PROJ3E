@@ -19,7 +19,7 @@ The Uno32 is programmed to test the h-bridge in the following four configuration
 \end{enumerate}
 
 \subsubsection{Results}
-\begin{table}[]
+\begin{table}[h]
 \centering
 \begin{tabular}{l|l|l}
 \textbf{H-bridge 1} & \textbf{H-bridge 2} & \textbf{Over Current} \\ \hline
@@ -38,17 +38,46 @@ Off                 & Break               & No
 \end{tabular}
 \caption{Results from first test of h-bridge}
 \label{firsthbridgetest}
-\end{table}
-There was a suspicion concerning the H-bridge, it had been measured that there was an error or a damaged component. The affected suspected part was the H-bridge for the left motor.\\
-
-All of the transistors were tested on the part of the H-bridge in question.
-Since there was a 0 in value on the base, it is suspected that a resistor which sat on the board just before the transistor. This and the other resistor values were measured and found to be identical, based on the measures it could be concluded that it was most likely a failed transistor.\\
-
-It was concluded that the damaged transistor was the: Q14 \cite{Q14}  
-\fixme{link til schematics}.\\
-
-The results were as following:\
-
-Normal NPN transistors: base 0.854V, collector 0.073V\
-
-Faulty NPN transistor. base 0V, collector 0V.\\
+\end{table} 
+The results from the first test shows that there is a fault in h-bridge 1.\\ 
+The first procedure in order to fix the fault was to add pulldown resistors to all base connections of the high side MOSFET's. This did not fix the problem.\\
+Due to the the scenarios causing the fault the problem was believed to be either MOSFET Q9 or Q11.\\
+Both of these MOSFETS where replaced for new ones, but this did also not fix the fault.\\
+After replacing the MOSFET's didn't work, all MOSFET's were de-soldered from the PCB in order to test if the fault was something other than the MOSFET's.\\
+The CPLD was configured to allow for direct signal pass through from the Uno32 in order for easier test and debugging of both h-bridges\\
+The Uno32 was programmed to generate a square wave on all eight pins, since this will make it easier to detect if any driver transistors have failed.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Transistor} & \textbf{Signal OK} \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Q5                  & Yes                \\ \hline
+Q6                  & Yes                \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Q7                  & Yes                \\ \hline
+Q8                  & Yes                \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Q13                 & Yes                \\ \hline
+Q14                 & No                 \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+Q15                 & Yes                \\ \hline
+Q16                 & Yes                \\ \hline
+\end{tabular}
+\caption{Test of driver transistors}
+\label{drivertransistortest}
+\end{table}\\
+The test shows that transistor Q14 is having issues with switching on and off.\\
+Additional measurements was made to confirm the fault in Q14. These results were:
+\begin{table}[h]
+\centering
+\begin{tabular}{l|l|l}
+\textbf{}                    & \textbf{Base} & \textbf{Collector} \\ \hline
+\textbf{Working trainsistor} & 0.854V        & 0.073V             \\ \hline
+\textbf{Faulty transitor}    & 0V            & 0V                
+\end{tabular}
+\caption{Voltage measurements of transistor Q14}
+\label{q14measurements}
+\end{table}\\
+With the results of the tests it was concluded that transistor Q14 was faulty and it was replaced.\\
+This resultet in both h-bridges working as intended under all four scenarios tested previously.
