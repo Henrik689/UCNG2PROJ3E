@@ -16,16 +16,15 @@ The micro controller is connected to the motor-shield.\ The motor-shield is then
 
 \section{Sensors and sensor concept}
 \fixme{Skal skrives om til nuværende setup}
-The robot will utilize one set of sensors - one set of QRE1113 sensors, which will be used for line-following capabilities, they are fastened towards the end of the robot, and will give the robot a way to detect what surface it is about to enter.\\
-The second is a hybrid set of ultrasound and infrared sensors. These will be working together to make the robot able to navigate open spaces more precisely, since infrared and ultrasound sensors work the best under different circumstances. This will end up as a product which is more optimized for usage in situations that would not be ideal for one of the other, since the hybrid design will leverage shortcomings of a given sensor method.\\
+The robot will utilize 3 ultrasound sensors. These will be working together to make the robot able to navigate open spaces more precisely. The 3 sensors are able to cover blind spots for each other and in this way provide for a more solid solution to object avoidance.
 
 \subsection{Choice of sensors}
 \fixme{Skal læses igennem, mangler der noget?}
 
-To find out what sensor to use in navigating the robot, two sensors were compared briefly on their specifications; The HC-SR04 and the PING))) Ultrasonic Distance Sensor.\\
+To find out what ultrasound sensors to use in navigating the robot, two sensors were compared briefly on their specifications; The HC-SR04 and the PING))) Ultrasonic Distance Sensor.\\
 The specifications have been put into a table for a quick perspective into the sensing distance, volt, current and price for each sensor.\\
 
-As seen in the table, it's two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING))) and as seen in the table, it's a staggering price difference of 200,- DKK between the HR-SR04 and the PING))), which could be a huge factor when producing multiple devices.\\
+As seen in the table, it's two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING))) and as seen in the table, it's a staggering price difference of Ca. 200,- DKK between the HR-SR04 and the PING))), which could be a huge factor when producing multiple devices.\\
 
 In the case of this project, the device available is the HC-SR04, even if the PING))) was available, the HC-SR04 has 4 pins compared to the PING))) with only 3 pins, this feature can make it easier to manage when coding the sensor and in this case making it the better choice.
 
@@ -41,12 +40,16 @@ In the case of this project, the device available is the HC-SR04, even if the PI
 Max/min sensor distance & 4m-2cm    & 3m-2cm     \\ \hline
 Working current         & 15mA      & 30mA       \\ \hline
 Voltage                 & 5DC       & 5DC        \\ \hline
-Price                   & 10.50,- DKK & 211.74,- DKK \\ \hline
+Price                   & 17.63,- DKK & 211.53,- DKK \\ \hline
 \end{tabular}
+\cite{HC-SR04}
+\cite{PING}
 \end{table}
 
+
+
 \subsection{Ultrasound sensor - HC-SR04}
-When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC sr04 has been picked.\\
+When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC-SR04 has been picked.\\
 
 \begin{figure}[!ht]
 	\centering
@@ -55,8 +58,7 @@ When a robot should be able avoid obstacles it will need a device to inform the 
 	\label{Hardware diagram}
 \end{figure}
 
-\fixme{Mere om denne sensor}
- 
+
 The way the ultrasound sensor works is by emitting acoustic waves and then waits for the waves to reflect back to the sensor. The waves are often at about 40 kHz and humans are unable to detect the sounds because of the frequencies being above the human audible range.\
 
 What is causing the device to make ultrasonic sound is a piezoelectric crystal. The crystal is receiving a rapid oscillating electrical signal, this causes the crystal to expand and contract and thereby creating a sound wave.\ The sound waves will then after being reflected return to a piezoelectric receiver which can then convert the waves into voltage by using the same method as explained above. \\
@@ -86,7 +88,7 @@ With this the robot can calculate the time of flight.\
 
 \subsubsection{Considerations:}
 When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration.\\ Temperature and humidity can affect the speed of sound, just as air currents have been known to be able to create invisible boundaries that can reflect ultrasonic waves.\\
-Ultrasound sensors have something called a dead zone, this occours when an object is infront of the sensors and the receiver can't keep up.\\
+Ultrasound sensors have something called a dead zone, this occurs when an object is in front of the sensors and the receiver can't keep up.\\
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
 \subsubsection{Mounting}
