@@ -1,10 +1,54 @@
 \subsection{CPLD}
+The purpose of this test is to verify that CPLD performs the correct logic task to control the dual h-bridge solutions.
 \subsubsection{Equipment}
 \begin{enumerate}
-	\item[•]Hameg HM8040-2 Triple Power Supply
-	\item[•]Fluke 45 Multimeter
+	\item[•]Agilent MSO-X 3024A Oscilloscope
+	\item[•]Agilent 54620-61601 Logic Analyzer Probe Cable
+	\item[•]ChipKit Uno32 Microcontroller
 \end{enumerate}
 
 \subsubsection{Setup}
+For the test logic probes was used to analyze the logic signals comming from the Uno32 into the CPLD aswell as the outputs from the CPLD going to the h-bridges.
 
 \subsubsection{Results}
+To compress the results the output will be in the following format:
+\begin{table}[h]
+\centering
+\scalebox{0.9}{
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{4}{|l|}{\textbf{Logic Input}} & \multicolumn{4}{l|}{\textbf{Expected output}} & \multicolumn{4}{l|}{\textbf{Recieved output}} \\ \hline
+En          & PWM       & A       & B      & TL           & BL         & TR      & BR      & TL           & BL         & TR      & BR      \\ \hline
+Bit 3       & 2         & 1       & 0      & Bit 3        & 2          & 1       & 0       & Bit 3        & 2          & 1       & 0       \\ \hline
+\end{tabular}}
+\caption{Results example}
+\label{resultsexample}
+\end{table}
+
+The results are from testing according to the truth table used to create the logic circuit programmed into the CPLD.
+\begin{table}[]
+\centering
+\scalebox{0.9}{
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Logic Input} & \textbf{Expected output} & \textbf{Recieved output} & \textbf{Pass} \\ \hline
+0000                 & 0101                     & 0101                     & Yes           \\ \hline
+0001                 & 0101                     & 0101                     & Yes           \\ \hline
+0010                 & 0101                     & 0101                     & Yes           \\ \hline
+0011                 & 0101                     & 0101                     & Yes           \\ \hline
+0100                 & 0101                     & 0101                     & Yes           \\ \hline
+0101                 & 0101                     & 0101                     & Yes           \\ \hline
+0110                 & 0101                     & 0101                     & Yes           \\ \hline
+0111                 & 0101                     & 0101                     & Yes           \\ \hline
+1000                 & 0101                     & 0101                     & Yes           \\ \hline
+1001                 & 0101                     & 0101                     & Yes           \\ \hline
+1010                 & 0101                     & 0101                     & Yes           \\ \hline
+1011                 & 0101                     & 0101                     & Yes           \\ \hline
+1100                 & 0000                     & 0000                     & Yes           \\ \hline
+1101                 & 0011                     & 0011                     & Yes           \\ \hline
+1110                 & 1100                     & 1100                     & Yes           \\ \hline
+1111                 & 1111                     & 1111                     & Yes           \\ \hline
+\end{tabular}}
+\caption{CPLD logic results}
+\label{cpldresult}
+\end{table}
