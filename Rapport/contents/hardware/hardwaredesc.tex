@@ -13,20 +13,15 @@ This includes topics such as the hardware diagram, considerations involving what
 The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The micro controller is receiving data from the sensor set; the ultrasound sensors and the tachometer sensor.\ The micro controller then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will send it to the interface. \\ \\
 
 \section{Sensors and sensor concept}
-\fixme{Skal skrives om til nuværende setup}
-The robot will utilize 3 ultrasound sensors. These will be working together to make the robot able to navigate open spaces more precisely. The 3 sensors are able to cover blind spots for each other and in this way provide for a more solid solution to object avoidance.
+The robot will utilize 3 ultrasound sensors. These will be working together to make the robot able to navigate open spaces more precisely. The 3 sensors are able to cover blind spots for each other and in this way provide for a more solid solution to object avoidance. They are mounted in a way such that there is one facing forwards, and one pointing out sideways from these, in a roughly 90 degree angle. This works for the robot in multiple ways; it covers blind spots and also allows the robot to "see" to its sides while moving straight forwards, this allows for more fluid object avoidance, since the robot can cut down on the amount of turns it has to make to follow an object to its side.
 
 \subsection{Choice of sensors}
-\fixme{Skal læses igennem, mangler der noget?}
-
 To find out what ultrasound sensors to use in navigating the robot, two sensors were compared briefly on their specifications; The HC-SR04 and the PING))) Ultrasonic Distance Sensor.\\
 The specifications have been put into a table for a quick perspective into the sensing distance, volt, current and price for each sensor.\\
 
-As seen in the table, it's two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING))) and as seen in the table, it's a staggering price difference of Ca. 200,- DKK between the HR-SR04 and the PING))), which could be a huge factor when producing multiple devices.\\
+As seen on the table; the two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING)). Additionally, there's a staggering price difference of approximately 200,- DKK between the HR-SR04 and the PING))), which is a concerning factor when producing multiple robots.\\
 
-In the case of this project, the device available is the HC-SR04, even if the PING))) was available, the HC-SR04 has 4 pins compared to the PING))) with only 3 pins, this feature can make it easier to manage when coding the sensor and in this case making it the better choice.
-
-
+In the case of this project, the device available is the HC-SR04. Even if the PING))) was available, the HC-SR04 has 4 pins compared to the PING))) with only 3 pins, this feature can make it easier to manage when coding the sensor.\\
 
 \begin{table}[!ht]
 \centering
@@ -44,7 +39,7 @@ Price                   & 17.63,- DKK & 211.53,- DKK \\ \hline
 
 \end{table}
 
-
+Even if availability wasn't a limitation, the clear choice would be the HC-SR04, due to the more impressive range and the better pricing of the HC-SR04.
 
 \subsection{Ultrasound sensor - HC-SR04}
 When a robot should be able avoid obstacles it will need a device to inform the robot where it's position is compared to the obstacle. This is where an ultrasound sensor plays an important role. For this task the HC-SR04 has been picked.\\
@@ -61,9 +56,7 @@ The way the ultrasound sensor works is by emitting acoustic waves and then waits
 
 What is causing the device to make ultrasonic sound is a piezoelectric crystal. The crystal is receiving a rapid oscillating electrical signal, this causes the crystal to expand and contract and thereby creating a sound wave.\ The sound waves will then after being reflected return to a piezoelectric receiver which can then convert the waves into voltage by using the same method as explained above. \\
 
-
-There are several popular ways to process the information gathered from the ultrasound sensor. \\
-
+There are several popular ways to process the information gathered from the ultrasound sensor.\
 \begin{enumerate}
 	\item[•]Time of flight
 	\item[•]Doppler shift
@@ -74,7 +67,7 @@ In the scope of the project, the robot will be using "Time of flight" for sensin
 
 When working with the term time of flight, it means the ultrasound sensor only generates pulses of sound instead of an continuous streak of sound waves. to avoid confusion. In high speed situations this will mean there is waiting time limits.\\ 
 
-The calculation for using the ultrasound sensor is: \\
+The calculation for using the ultrasound sensor is:\\
 
 t = time\\
 r = distance travelled\\
@@ -168,7 +161,7 @@ This is a small motor, drawing 120mA when there is no load, and 1600mA when stal
 
 \subsubsection{Pololu Magnetic Encoder Pair Kit}
 
-These encoders allow the transmission of data based on motor movement. It works by having the encoder board count the revolutions of the magnetic disc mounted on the board. It does this twelve times per revolution.
+These encoders allow the transmission of data based on motor movement. It works by having the encoder board count the revolutions of the magnetic disc mounted on the board. It does this twelve times per revolution. The transmission of this data allows the robot to monitor how long it has traveled. This data, along with directional data coming from the code, will allow the robot to track its own movement in a coordinate system. This way, the robot will always start on (0, 0), and if given a destination coordinate to navigate towards, it will be able to both find the most efficient way there, but also track its movement throughout the runtime.
 
 \begin{figure}[!ht]
 	\centering

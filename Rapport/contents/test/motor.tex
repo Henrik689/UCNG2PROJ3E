@@ -1,10 +1,32 @@
 \subsection{DC Motors}
+The purpose of this test is to measure the power requirements of the DC motor used on the robot under different scenarios.
 \subsubsection{Equipment}
 \begin{enumerate}
-	\item[•]Hameg HM8040-2 Triple Power Supply
+	\item[•]Elcanic Power Supply
 	\item[•]Fluke 45 Multimeter
 \end{enumerate}
 
 \subsubsection{Setup}
+The setup consist of a single DC motor connected to the Elcanic Power Supply with on of the power leads passing through the Fluke 45 Multimeter for current measurements.
+
+The motor will be tested in the following scenarios:
+\begin{enumerate}
+	\item[•]no load.
+	\item[•]Under load.
+	\item[•]Stalled.
+\end{enumerate}
 
 \subsubsection{Results}
+\begin{table}[h]
+\centering
+\label{dcmotortest}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Scenario} & \textbf{Current measured} \\ \hline
+No load          & 150mA \\ \hline
+Under load       & 750mA \\ \hline
+Stalled         	 & 2A + \\ \hline
+\end{tabular}
+\caption{DC Motor test results}
+\end{table}
+During the test it was observed that when testing the motor while stalled it drew more than two amps. This was apperant as the Elcanic power supply kept going into over current protection mode when doing the test and it is not able to supply more current. The test will not be made with a more powerful power supply to the risk of damaging the motor.
