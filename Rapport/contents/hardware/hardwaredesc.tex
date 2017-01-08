@@ -1,8 +1,6 @@
 \section{Description of the hardware structure and functionality}
- 
-\fixme{mere fyld og billede}
-In this section the different components of the hardware will be listed, described and explained.\
-
+In the following section the different parts, components and devices of the hardware will be listed, described and explained.\
+This includes topics such as the hardware diagram, considerations involving what sensors to use, the MCU, the self designed h-bridge and the motors with the encoders.
 
 \section{Hardware diagram}
 \begin{figure}[!ht]
@@ -55,7 +53,7 @@ When a robot should be able avoid obstacles it will need a device to inform the 
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/hc04.jpg}
 	\caption{\text{The HC-SR04 ultrasound sensor}}
-	\label{Hardware diagram}
+	\label{HC-SR04}
 \end{figure}
 
 
@@ -92,14 +90,15 @@ Ultrasound sensors have something called a dead zone, this occurs when an object
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
 \subsubsection{Mounting}
-\fixme{TBD billede med lille tekst}
 
-%\begin{figure}[!ht]
-	%\centering
-	%\includegraphics[width=0.7\textwidth]{figures/mount.jpg}
-	%\caption{\text[Sensor mount]{Mounts made by 3D printing, for ultrasound sensors}}
-	%\label{Hardware diagram}
-%\end{figure}
+For putting the sensors in place facing the right directions, a 3D-printed mount was made and then bolted to the chassis of the bot. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/Mount1.png}
+	\caption{\text[Sensor mount]{Mounts made by 3D printing, for ultrasound sensors}}
+	\label{Mount}
+\end{figure}
 
 %\subsection{Infrared sensor - QRE1113}
 
@@ -145,7 +144,13 @@ The features are:
 		\item[•]Header for Bluetooth module.
 	\end{enumerate}
 \end{enumerate}
-\fixme{INDSÆT BILLEDE AF SHIELD}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/motorShield.jpg}
+	\caption{\text{The self-designed motor-shield}}
+	\label{Motorshield}
+\end{figure}
 
 \subsection{The H bridge}
 The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
