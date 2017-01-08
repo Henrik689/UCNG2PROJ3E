@@ -1,5 +1,5 @@
 \subsection{Ultrasound HC-SR04}
-
+The purpose of this test is to measure is the HRC-S04 Ultrasonic distance sensor is reliable at reading the distance to an object.
 
 \subsubsection{Equipment}
 
@@ -12,8 +12,18 @@
 A small program for the Arduino has been written which allows the MCU to trigger the sensor and waits a pre-specified amount of time before triggering again, to allow for the return of the ultrasound wave. 
 
 \subsubsection{Results}
-\textbf{30mm:}  152 us\\
-\textbf{50mm:}  285 us\\
-\textbf{100mm:} 600 us\\
-\textbf{200mm:} 1.23 ms\\
-\textbf{500mm:} 2.32 ms\\
+In order to to validate to the results we can calculate the actual measured length using the speed of sound, which is $ 340.29 \frac{M}{s} $ or $2.9\frac{\mu s}{mm}$. To calculate the distance we can use: $(\frac{time}{speed of sound})/2$ \cite{SOF}
+\begin{table}[h]
+\centering
+\label{ultrasoundtestresults}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Test distance & Time Pulse measured & calculated  distance & Difference \\ \hline
+30mm          & 152                 & 26.2mm               & 3.8mm      \\ \hline
+50mm          & 285                 & 49.1mm               & 0.9mm      \\ \hline
+100mm         & 600                 & 103.4mm              & 3.4mm      \\ \hline
+200mm         & 1.32                & 227.6mm              & 27.6mm     \\ \hline
+500mm         & 2.32                & 400mm                & 100mm      \\ \hline
+\end{tabular}
+\caption{Ultrasound test results}
+\end{table}
