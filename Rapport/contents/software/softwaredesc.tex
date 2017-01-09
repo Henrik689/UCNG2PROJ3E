@@ -46,7 +46,7 @@ void initPWM() {
 \subsection {Duty cycle}
 
 The duty cycle is used to describe how long the power is 'on' compared to 'off'. A higher duty cycle will yield more energy than a low one. The software uses a frequency of 1000Hz, which makes it straightforward to calculate to real time, if this is needed - it also provides enough precision to make the motors responsive quickly.
-The duty cycle can be changed by changing how long until the Output Compare sends a falling edge:
+The duty cycle can be altered by changing how long until the Output Compare sends a falling edge:
 
 \begin{lstlisting}
 void adjustDuty(int channel, int duty) {//The function takes an argument based on which motors PWM should change, and the desired duty cycle
@@ -66,7 +66,7 @@ A feedback loop is a way of controlling how something, in this case a robot, beh
 The robot made in this project utilizes a feedback loop by firstly turning towards a set goal, and then avoiding obstacles along the way through sensors measuring the distance from the robot to the obstacle. If an obstacle gets too close, the robot will turn away from the obstacle and head back towards the goal.
 \newpage
 \subsection{Reading sensors}
-To know how far away an object is, some form of sensor feedback is needed. In this case, 3 ultrasound sensors have been implemented. The microprocessor sends a turn-on signal to the sensors, starts a timer and then waits until the sensors return with their own signal. The time between the start and finish signal can then be used to calculate the distance between the robot and the object.\\
+To know how far away an object is, some form of sensor feedback is needed. In this case, three ultrasound sensors have been implemented. The microprocessor sends a turn-on signal to the sensors, starts a timer and then waits until the sensors return with their own signal. The time between the start and finish signal can then be used to calculate the distance between the robot and the object.\\
 \begin{lstlisting}
 long readUltrasonic(int channel){  
     long timerFinish = 0;
@@ -101,10 +101,10 @@ The short pulse sent in the beginning of the function has been set by the manufa
 	\label{Timing diagram}
 \end{figure}
 
-To reduce false sensor data, which there seems to be a lot of with these sensors, a rolling average has been implemented. This calculates the average of the previous 5 readings instead of a single reading, allowing the robot to ignore spikes in data.
+To reduce false sensor data, which there seems to be a lot of with these sensors, a rolling average has been implemented. This calculates the average of the previous five readings instead of a single reading, allowing the robot to ignore spikes in data.
 \newpage
 \subsection{Feedback}
-The controller function takes the data from the 3 sensors and uses these to control how the robot should behave. The function is by no means fully optimized, but allows the robot to avoid obstacles in it's way.
+The controller function takes the data from the three sensors and uses these to control how the robot should behave. The function is by no means fully optimized, but allows the robot to avoid obstacles in it's way.
 \begin{lstlisting}
 void controller(int midSensor, int rightSensor, int leftSensor){
     int midDistance = 100; //Sets the limit for the sensors, in millimetres
@@ -149,25 +149,25 @@ if(this) {
 	this
 }
 \end{lstlisting}
-a CPLD is programmed with what is called Hardware description language or HDL for short.
-instead of writing condition statements like you do in C, you define logic blocks and describe what that logic block do with the inputs and outputs given. \cite{HDL}
-This allows for programming small logic circuits that act like several 74-series logic chips put together, but a CPLD can also be configured to contain a small microcontroller what internally can interpret machine code.\\ 
-This make a CPLD a very powerful device since it can be configured to anything that can be made with pure logic circuitry, given that the selected CPLD have the needed amount of internal configurable logic blocks for the implementation. \cite{CPLD}
-To simplify the programming, the IDE used to program the CPLD used on the motor shield, allows for programming by drawing schematics, which the IDE then synthensize and translate into the format the can be uploaded to the CPLD.\\
-The CPLD on the motor shield is configured to allow full individual control of each h-bridge by using 4 control lines from the PIC32 to the CPLD for each h-bridge:
+A CPLD is programmed with what is called Hardware Description Language or HDL for short.
+Instead of writing condition statements like you do in C, you define logic blocks and describe what that logic block do with the inputs and outputs given. \cite{HDL}
+This allows for programming small logic circuits that act like several 74-series logic chips put together, but a CPLD can also be configured to contain a small microcontroller which can interpret machine code internally.\\
+This makes a CPLD a very powerful device since it can be configured to anything that can be made with pure logic circuitry, given that the selected CPLD has the needed amount of internal configurable logic blocks for the implementation. \cite{CPLD}
+To simplify the programming, the IDE used to program the CPLD used on the motor shield allows for programming by drawing schematics, which the IDE then synthensize and translate into the format the can be uploaded to the CPLD.\\
+The CPLD on the motor shield is configured to allow full individual control of each H-bridge by using four control lines from the PIC32 to the CPLD for each H-bridge:
 \begin{enumerate}
 	\item[•]Enable
 	\item[•]Direction A
 	\item[•]Direction B
 	\item[•]PWM
 \end{enumerate}
-Using these inputs without any logic control, allows for unwanted configurations of the h-bridge that will cause the power supply to be shortet to ground, this issues have been solved by programming the CPLD with a logic block that does not allow the configuration to occur, no matter the configuration of the input to the CPLD.\\
+Using these inputs without any logic control, allows for unwanted configurations of the H-bridge that will cause the power supply to be shorted to ground, these issues have been solved by programming the CPLD with a logic block that does not allow the configuration to occur, no matter the configuration of the input to the CPLD.\\
 \ref{hbridgecpldlogic} shows the logic configurations of one of the two logic blocks that have been programmed into the CPLD.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/cpldlogic.png}
-	\caption{\text{Single h-bridge logic block}}
+	\caption{\text{Single H-bridge logic block}}
 	\label{hbridgecpldlogic}
 \end{figure}
 \newpage
@@ -176,5 +176,5 @@ Using these inputs without any logic control, allows for unwanted configurations
 \section{Part conclusion}
 A few issues occurred during the development of the software, most importantly being the localization code. This part was omitted from the final project due to time constraints since it is only half way done. The code should have functioned by calculating the distance the robot has travelled by using cosine and sine functions, since it was always possible to generate a theoretical triangle from where the bot starts and where it starts turning.\\
 This also meant that the calculations for turning towards the goal after avoiding an object did not work, since this was planned to be made from the robots position relative to the start and end point.\\\\
-A consideration made in the project was to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constricted systems, however, the system used in this project does fine without, since reading all 3 sensors take less than 10 ms.\\\\
+A consideration made in the project was to implement a real time system, such as RTOS, for the program. RTOS would make it possible for the sensors to be read simultaneously instead of one after the other. This could make a huge difference in time constrained systems, however, the system used in this project does fine without, since reading all three sensors take less than 10 ms.\\\\
 Due to time constraints, a few requirements for the project have not been met. These include the need for line following capabilities, localization and the ability to return to a path that leads to goal.

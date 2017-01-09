@@ -1,5 +1,5 @@
 \subsection{H-Bridge}
-The purpose of this test is to verify that the two h-bridges functions as intended.
+The purpose of this test is to verify that the two H-bridges functions as intended.
 
 \subsubsection{Equipment}
 \begin{enumerate}
@@ -9,8 +9,8 @@ The purpose of this test is to verify that the two h-bridges functions as intend
 \end{enumerate}
 
 \subsubsection{Setup}
-The h-bridge i controlled with the Uno32 through the logic circuit programmed into the CPLD. The Current draw and voltage of the entire system is measured with two Fluke 45 multimeters. Input power is supplied by the Elcanic power supply.\\
-The Uno32 is programmed to test the h-bridge in the following four configurations:
+TheH-bridge is controlled with the Uno32 through the logic circuit programmed into the CPLD. The current draw and voltage of the entire system is measured with two Fluke 45 multimeters. Input power is supplied by the Elcanic power supply.\\
+The Uno32 is programmed to test the H-bridge in the following four configurations:
 \begin{enumerate}
 	\item[•]Coast
 	\item[•]Power from top left to bottom right
@@ -36,14 +36,14 @@ Off                 & Power Dir A         & No                    \\ \hline
 Off                 & Power Dir A         & No                    \\ \hline
 Off                 & Break               & No                   
 \end{tabular}
-\caption{Results from first test of h-bridge}
+\caption{Results from first test of H-bridge}
 \label{firsthbridgetest}
 \end{table} 
-The results from the first test shows that there is a fault in h-bridge 1.\\ 
-The first procedure in order to fix the fault was to add pulldown resistors to all base connections of the high side MOSFET's. This did not fix the problem.\\
+The results from the first test shows that there is a fault in H-bridge 1.\\ 
+The first procedure in order to fix the fault was to add pulldown resistors to all base connections of the high side MOSFETs. This did not fix the problem.\\
 Due to the the scenarios causing the fault the problem was believed to be either MOSFET Q9 or Q11.\\
 Both of these MOSFETS where replaced for new ones, but this did also not fix the fault.\\
-After replacing the MOSFET's didn't work, all MOSFET's were de-soldered from the PCB in order to test if the fault was something other than the MOSFET's.\\
+After replacing the MOSFETs didn't work, all MOSFETs were de-soldered from the PCB in order to test if the fault was something other than the MOSFETs.\\
 The CPLD was configured to allow for direct signal pass through from the Uno32 in order for easier test and debugging of both h-bridges\\
 The Uno32 was programmed to generate a square wave on all eight pins, since this will make it easier to detect if any driver transistors have failed.
 \begin{table}[h]
@@ -80,4 +80,4 @@ Additional measurements was made to confirm the fault in Q14. These results were
 \label{q14measurements}
 \end{table}\\
 With the results of the tests it was concluded that transistor Q14 was faulty and it was replaced.\\
-This resultet in both h-bridges working as intended under all four scenarios tested previously.
+This resultet in both H-bridges working as intended under all four scenarios tested previously.

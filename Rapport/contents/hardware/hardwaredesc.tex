@@ -1,6 +1,6 @@
 \section{Description of the hardware structure and functionality}
 In the following section the different parts, components and devices of the hardware will be listed, described and explained.\
-This includes topics such as the hardware diagram, considerations involving what sensors to use, the MCU, the self designed h-bridge and the motors with the encoders.
+This includes topics such as the hardware diagram, considerations involving what sensors to use, the MCU, the self designed H-bridge and the motors with the encoders.
 
 \section{Hardware diagram}
 \begin{figure}[!ht]
@@ -10,10 +10,10 @@ This includes topics such as the hardware diagram, considerations involving what
 	\label{Hardware diagram}
 \end{figure}
 
-The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The micro controller is receiving data from the sensor set; the ultrasound sensors and the tachometer sensor.\ The micro controller then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will send it to the interface. \\ \\
+The micro controller is connected to the motor-shield.\ The motor-shield is then connected to the two motors, called motor 1 and motor 2 and is powering both motors.\ The MCU is receiving data from the sensor set; the ultrasound sensors and the tachometer sensor.\ The MCU then receives the data from the sensors and sends it further to the Bluetooth transceiver and then the Bluetooth transceiver will be able send data to an interface, either in the form of a terminal program on a computer or a previously made app made to connect to Bluetooth devices. \\ \\
 
 \section{Sensors and sensor concept}
-The robot will utilize 3 ultrasound sensors. These will be working together to make the robot able to navigate open spaces more precisely. The 3 sensors are able to cover blind spots for each other and in this way provide for a more solid solution to object avoidance. They are mounted in a way such that there is one facing forwards, and one pointing out sideways from these, in a roughly 90 degree angle. This works for the robot in multiple ways; it covers blind spots and also allows the robot to "see" to its sides while moving straight forwards, this allows for more fluid object avoidance, since the robot can cut down on the amount of turns it has to make to follow an object to its side.
+The robot will utilize three ultrasound sensors. These will be working together to make the robot able to navigate open spaces more precisely. The three sensors are able to cover blind spots for each other and in this way provide for a more solid solution to object avoidance. They are mounted in a way such that there is one facing forwards, and one pointing out sideways from these, in a roughly 90 degree angle. This works for the robot in multiple ways; it covers blind spots and also allows the robot to "see" to its sides while moving straight forwards, this allows for more smooth object avoidance, since the robot can reduce the amount of turns it has to make to follow an object to its side.
 
 \subsection{Choice of sensors}
 To find out what ultrasound sensors to use in navigating the robot, two sensors were compared briefly on their specifications; The HC-SR04 and the PING))) Ultrasonic Distance Sensor.\\
@@ -21,7 +21,7 @@ The specifications have been put into a table for a quick perspective into the s
 
 As seen on the table; the two sensors with slight differences, the HC-SR04 can measure an extra meter compared the PING)). Additionally, there's a staggering price difference of approximately 200,- DKK between the HR-SR04 and the PING))), which is a concerning factor when producing multiple robots.\\
 
-In the case of this project, the device available is the HC-SR04. Even if the PING))) was available, the HC-SR04 has 4 pins compared to the PING))) with only 3 pins, this feature can make it easier to manage when coding the sensor.\\
+In the case of this project, the device available is the HC-SR04. Even if the PING))) was available, the HC-SR04 has four pins compared to the PING))) with only three pins, this feature can make it easier to manage when coding the sensor.\\
 
 \begin{table}[!ht]
 \centering
@@ -58,7 +58,7 @@ What is causing the device to make ultrasonic sound is a piece of piezoelectric 
 
 In the scope of the project, the robot will be using the speed of sound for sensing the distance between itself and the obstacle.\
 
-The ultrasound sensor only generates pulses of sound instead of an continuous streak of sound waves. to avoid confusion. In high speed situations this will mean there is waiting time limits.\\ 
+The ultrasound sensor only generates pulses of sound instead of an continuous streak of sound waves. to avoid confusion. In time constrained situations, this can cause issues while waiting for a response.\\ 
 
 The calculation for using the ultrasound sensor is:\\
 
@@ -71,7 +71,7 @@ r = c*t/2\\
 With this the robot can calculate the distance to the object.\
 
 \subsubsection{Considerations:}
-When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration.\\ Temperature and humidity can affect the speed of sound, just as air currents have been known to be able to create invisible boundaries that can reflect ultrasonic waves.\\
+When using the ultrasound as a sensing tool, there are some factors that must be taken into consideration, such as temperature and humidity affecting the speed of sound.
 Ultrasound sensors have something called a dead zone, this occurs when an object is in front of the sensors and the receiver can't keep up.\\
 Some materials are very absorbent, which will result in less reflected ultrasound to be detected by the receiver.
 
@@ -101,7 +101,7 @@ For putting the sensors in place facing the right directions, a 3D-printed mount
 
 \section{The chipKIT Uno32 board}
 The robot will utilize the chipKIT Uno32 board to execute code and act as a controller for the sensors, motors, and the Bluetooth module. The board
-was chosen both due to past experiences. It's proven to be simple to work with and provide multiple ports to make it possible to utilize more than enough modules for the robot's functionality.
+was chosen both due to past experiences. It has shown to be simple to work with and provide multiple ports to make it possible to utilize more than enough modules for the robot's functionality.
 
 The board is also compatible with Arduino shields, and as such designing the H-bridge for it becomes more straightforward. It's fast enough to execute the code, and works well within the input power range that the robot will operate within.
 
@@ -132,7 +132,7 @@ The features are:
 \end{figure}
 
 \subsection{The H bridge}
-The robot will make use of an H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
+The robot will make use of a selfdesigned H-bridge. An H-bridge is a circuit made for controlling the motor of the robot, by making sure the motor will never try to do forward and backward motion  and cause errors or short circuits. The point of using an H-bridge is to ensure motor safety and functionality.
 
 \subsection{Pololu 100:1 Micro Metal Gearmotor 6V High Power}
 
