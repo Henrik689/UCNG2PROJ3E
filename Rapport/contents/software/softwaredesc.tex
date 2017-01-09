@@ -42,7 +42,7 @@ void initPWM() {
     PR2 = (sysClk / (pwmFreq * 2) * prescaleV) - 1;
 }
 \end{lstlisting}
- 
+\newpage
 \subsection {Duty cycle}
 
 The duty cycle is used to describe how long the power is 'on' compared to 'off'. A higher duty cycle will yield more energy than a low one. The software uses a frequency of 1000Hz, which makes it straightforward to calculate to real time, if this is needed - it also provides enough precision to make the motors responsive quickly.
@@ -64,6 +64,7 @@ void adjustDuty(int channel, int duty) {//The function takes an argument based o
 \section{Feedback loop}
 A feedback loop is a way of controlling how something, in this case a robot, behaves by receiving an output and adjusting the performance to match a desired output.\\
 The robot made in this project utilizes a feedback loop by firstly turning towards a set goal, and then avoiding obstacles along the way through sensors measuring the distance from the robot to the obstacle. If an obstacle gets too close, the robot will turn away from the obstacle and head back towards the goal.
+\newpage
 \subsection{Reading sensors}
 To know how far away an object is, some form of sensor feedback is needed. In this case, 3 ultrasound sensors have been implemented. The microprocessor sends a turn-on signal to the sensors, starts a timer and then waits until the sensors return with their own signal. The time between the start and finish signal can then be used to calculate the distance between the robot and the object.\\
 \begin{lstlisting}
@@ -91,6 +92,7 @@ long readUltrasonic(int channel){
     return result;  
 }
 \end{lstlisting}
+\newpage
 The short pulse sent in the beginning of the function has been set by the manufacturer: \cite{HCSR04Datasheet}
 \begin{figure}[!ht]
 	\centering

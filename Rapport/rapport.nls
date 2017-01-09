@@ -2,27 +2,32 @@
 
  \nomgroup{A}
 
-   \item [{PWM}]\begingroup Pulse-width Modulation\nomeqref {0}
+  \item [{CPLD}]\begingroup Complex Programmable Logic Devies\nomeqref {0}
+		\nompageref{1}
+  \item [{DC}]\begingroup Direct Current\nomeqref {0}\nompageref{1}
+  \item [{EAGLE}]\begingroup EAGLE is an electronic design automation application with schematic capture, printed circuit board layout, auto-router and computer-aided manufacturing features\nomeqref {0}
 		\nompageref{1}
   \item [{IDE}]\begingroup Integrated Development Environment\nomeqref {0}
+		\nompageref{1}
+  \item [{ISE}]\begingroup Xililx Integrated Synthesis Environment is a software tool for synthesis and analysis of Hardware Description Language\nomeqref {0}
 		\nompageref{1}
   \item [{MCU}]\begingroup Microcontroller Unit\nomeqref {0}
 		\nompageref{1}
-  \item [{UART}]\begingroup Universal Asynchronous Receiver/Transmitter\nomeqref {0}
-		\nompageref{1}	
-  \item [{IDE}]\begingroup Integrated Development Environment\nomeqref {0}
-		\nompageref{1}
-  \item [{DC}]\begingroup Direct Current\nomeqref {0}
+  \item [{MOSFET}]\begingroup Metal-Oxide-Semiconductor-Field-Effect Transistor\nomeqref {0}
 		\nompageref{1}
   \item [{NPN}]\begingroup Negative-Positive-Negative\nomeqref {0}
 		\nompageref{1}
-  \item [{CPLD}]\begingroup Complex Programmable Logic Device\nomeqref {0}
+  \item [{PCB}]\begingroup Printed Circuit Board\nomeqref {0}
+		\nompageref{1}
+  \item [{PNP}]\begingroup Positive-Negative-Positive\nomeqref {0}
+		\nompageref{1}
+  \item [{PWM}]\begingroup Pulse-width Modulation\nomeqref {0}
 		\nompageref{1}
   \item [{RTOS}]\begingroup Real-Time Operating System\nomeqref {0}
 		\nompageref{1}
-  \item [{MOSFET}]\begingroup Metal-Oxide-Semiconductor-Field-Effect Transistor\nomeqref {0}
-		\nompageref{1}
   \item [{TACH}]\begingroup Tachometer - an instrument measuring the rotation speed of a shaft or disk, as in a motor or other machine\nomeqref {0}
 		\nompageref{1}
-		
+  \item [{UART}]\begingroup Universal Asynchronous Receiver/Transmitter\nomeqref {0}
+		\nompageref{1}
+
 \end{thenomenclature}
